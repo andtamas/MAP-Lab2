@@ -1,9 +1,6 @@
-package com.example;
+package com.example.model;
 
 import java.util.List;
-
-import com.example.model.Member;
-import com.example.model.ReadableItem;
 
 public class Library {
     private String id;
