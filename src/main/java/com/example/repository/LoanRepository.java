@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class LoanRepository {
     private List<Loan> loanList;
 
-    public LoanRepository(List<Loan> loans) {
+    public LoanRepository() {
         loanList = new ArrayList<>();
     }
 
@@ -21,11 +21,11 @@ public class LoanRepository {
         loanList.add(loan);
     }
 
-    public List<Loan> getLoans() {
+    public List<Loan> getList() {
         return loanList;
     }
 
-    public Loan getLoanById(String id) {
+    public Loan findById(String id) {
         for (int i = 0; i<loanList.size(); i++) {
             if (loanList.get(i).getId().equals(id)) {
                 return loanList.get(i);
@@ -44,7 +44,7 @@ public class LoanRepository {
         return false;
     }
 
-    public Loan getLoanByMemberId(String memberId) {
+    public Loan getByMemberId(String memberId) {
         for (int i=0; i<loanList.size(); i++) {
             if (loanList.get(i).getMemberId().equals(memberId)) {
                 return loanList.get(i);

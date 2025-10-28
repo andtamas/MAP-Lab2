@@ -21,11 +21,11 @@ public class MemberRepository {
         memberList.add(member);
     }
 
-    public List<Member> getMemberList() {
+    public List<Member> getList() {
         return memberList;
     }
 
-    public Member getMemberById(String id) {
+    public Member findById(String id) {
         for (int i = 0; i < memberList.size(); i++) {
             if (memberList.get(i).getId().equals(id)) {
                 return memberList.get(i);
@@ -44,7 +44,7 @@ public class MemberRepository {
         return false;
     }
 
-    public Member getMemberByLibraryId(String id) {
+    public Member findByLibraryId(String id) {
         for (int i = 0; i < memberList.size(); i++) {
             if (memberList.get(i).getLibraryId().equals(id)) {
                 return memberList.get(i);

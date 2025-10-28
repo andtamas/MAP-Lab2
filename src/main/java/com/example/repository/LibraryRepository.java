@@ -21,11 +21,11 @@ public class LibraryRepository {
         libraryList.add(library);
     }
 
-    public List<Library> getLibraryList() {
+    public List<Library> getList() {
         return libraryList;
     }
 
-    public Library getLibraryById(String id) {
+    public Library findById(String id) {
         for (int i = 0; i < libraryList.size(); i++) {
             if (libraryList.get(i).getId().equals(id)) {
                 return libraryList.get(i);
