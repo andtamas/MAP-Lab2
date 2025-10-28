@@ -11,14 +11,23 @@ public class LibraryRepository {
         libraryList = new ArrayList<Library>();
     }
 
-    public void save(Library library) {
+    public void add(Library library) {
+        for (int i = 0; i < libraryList.size(); i++) {
+            if (libraryList.get(i).getId().equals(library.getId())) {
+                throw new IllegalArgumentException("Library with ID " + library.getId() + " already exists");
+            }
+        }
+        libraryList.add(library);
+    }
+
+    public void update(Library library) {
         for (int i = 0; i < libraryList.size(); i++) {
             if (libraryList.get(i).getId().equals(library.getId())) {
                 libraryList.set(i, library);
                 return;
             }
         }
-        libraryList.add(library);
+        throw new IllegalArgumentException("Library with ID " + library.getId() + " not found.");
     }
 
     public List<Library> getList() {

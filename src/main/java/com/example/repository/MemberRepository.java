@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.model.Library;
 import com.example.model.Member;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +12,23 @@ public class MemberRepository {
         memberList = new ArrayList<Member>();
     }
 
-    public void save(Member member) {
+    public void add(Member member) {
+        for (int i = 0; i < memberList.size(); i++) {
+            if (memberList.get(i).getId().equals(member.getId())) {
+                throw new IllegalArgumentException("Library with ID " + member.getId() + " already exists");
+            }
+        }
+        memberList.add(member);
+    }
+
+    public void update(Member member) {
         for (int i = 0; i < memberList.size(); i++) {
             if (memberList.get(i).getId().equals(member.getId())) {
                 memberList.set(i, member);
                 return;
             }
         }
-        memberList.add(member);
+        throw new IllegalArgumentException("Library with ID " + member.getId() + " not found.");
     }
 
     public List<Member> getList() {
@@ -34,9 +44,9 @@ public class MemberRepository {
         return null;
     }
 
-    public boolean delete (Member member) {
+    public boolean delete (String id) {
         for (int i = 0; i < memberList.size(); i++) {
-            if (memberList.get(i).getId().equals(member.getId())) {
+            if (memberList.get(i).getId().equals(id)) {
                 memberList.remove(i);
                 return true;
             }
