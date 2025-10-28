@@ -12,13 +12,23 @@ public class LoanRepository {
         loanList = new ArrayList<>();
     }
 
-    public void save(Loan loan) {
+    public void add(Loan loan) {
         for (int i=0; i<loanList.size(); i++) {
             if (loanList.get(i).getId().equals(loan.getId())) {
-                loanList.set(i, loan);
+                throw new IllegalArgumentException("Loan already exists.");
             }
         }
         loanList.add(loan);
+    }
+
+    public void update(Loan loan) {
+        for (int i=0; i<loanList.size(); i++) {
+            if (loanList.get(i).getId().equals(loan.getId())) {
+                loanList.set(i, loan);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Loan not found.");
     }
 
     public List<Loan> getList() {
@@ -31,10 +41,10 @@ public class LoanRepository {
                 return loanList.get(i);
             }
         }
-        return null;
+        throw new  IllegalArgumentException("Loan not found.");
     }
 
-    public boolean delete (String id) {
+    public boolean delete(String id) {
         for (int i=0; i<loanList.size(); i++) {
             if (loanList.get(i).getId().equals(id)) {
                 loanList.remove(i);

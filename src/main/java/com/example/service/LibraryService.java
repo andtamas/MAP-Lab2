@@ -25,10 +25,7 @@ public class LibraryService {
     }
 
     public Library getLibraryById(String id) {
-        if (libraryRepository.findById(id)==null) {
-            throw new  IllegalArgumentException("Library with ID " + id + " not found.");
-        }
-        return libraryRepository.findById(id);
+       return libraryRepository.findById(id);
     }
 
     public boolean deleteLibrary(String id) {

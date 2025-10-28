@@ -14,7 +14,7 @@ public class LibraryRepository {
     public void add(Library library) {
         for (int i = 0; i < libraryList.size(); i++) {
             if (libraryList.get(i).getId().equals(library.getId())) {
-                throw new IllegalArgumentException("Library with ID " + library.getId() + " already exists");
+                throw new IllegalArgumentException("Library already exists");
             }
         }
         libraryList.add(library);
@@ -27,7 +27,7 @@ public class LibraryRepository {
                 return;
             }
         }
-        throw new IllegalArgumentException("Library with ID " + library.getId() + " not found.");
+        throw new IllegalArgumentException("Library not found.");
     }
 
     public List<Library> getList() {
@@ -40,7 +40,7 @@ public class LibraryRepository {
                 return libraryList.get(i);
             }
         }
-        return null;
+        throw new IllegalArgumentException("Library not found.");
     }
 
     public boolean delete(String id) {

@@ -24,13 +24,14 @@ public class MemberService {
     }
 
     public Member getMemberById(String id) {
-        if (memberRepository.findById(id)==null) {
-            throw new  IllegalArgumentException("Member with ID " + id + " not found.");
-        }
         return memberRepository.findById(id);
     }
 
     public boolean deleteMember(String id) {
         return memberRepository.delete(id);
+    }
+
+    public Member getMemberByLibraryId(String id) {
+        return memberRepository.findByLibraryId(id);
     }
 }

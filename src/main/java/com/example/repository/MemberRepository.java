@@ -15,7 +15,7 @@ public class MemberRepository {
     public void add(Member member) {
         for (int i = 0; i < memberList.size(); i++) {
             if (memberList.get(i).getId().equals(member.getId())) {
-                throw new IllegalArgumentException("Library with ID " + member.getId() + " already exists");
+                throw new IllegalArgumentException("Library already exists");
             }
         }
         memberList.add(member);
@@ -28,7 +28,7 @@ public class MemberRepository {
                 return;
             }
         }
-        throw new IllegalArgumentException("Library with ID " + member.getId() + " not found.");
+        throw new IllegalArgumentException("Library not found.");
     }
 
     public List<Member> getList() {
@@ -41,7 +41,7 @@ public class MemberRepository {
                 return memberList.get(i);
             }
         }
-        return null;
+        throw new  IllegalArgumentException("Member not found.");
     }
 
     public boolean delete (String id) {
