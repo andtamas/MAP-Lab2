@@ -43,4 +43,14 @@ public class MemberRepository {
         }
         return false;
     }
+
+    public Member getMemberByLibraryId(String id) {
+        for (int i = 0; i < memberList.size(); i++) {
+            if (memberList.get(i).getLibraryId().equals(id)) {
+                return memberList.get(i);
+            }
+        }
+        return null;
+    }
+
 }
