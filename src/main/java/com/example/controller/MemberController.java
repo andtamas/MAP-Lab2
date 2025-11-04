@@ -18,7 +18,7 @@ public class MemberController {
 
     @GetMapping
     public String listMembers(Model model) {
-        model.addAttribute("members", memberService.getAllMembers());
+        model.addAttribute("members", memberService.getAll());
         return "member/index";
     }
 
@@ -30,13 +30,13 @@ public class MemberController {
 
     @PostMapping
     public String createMember(@ModelAttribute Member member) {
-        memberService.addMember(member);
+        memberService.add(member);
         return "redirect:/members";
     }
 
     @PostMapping("/{id}/delete")
     public String deleteMember(@PathVariable String id) {
-        memberService.deleteMember(id);
+        memberService.delete(id);
         return "redirect:/members";
     }
 }

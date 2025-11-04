@@ -18,7 +18,7 @@ public class LibraryController {
 
     @GetMapping
     public String listLibraries(Model model) {
-        model.addAttribute("libraries", libraryService.getAllLibraries());
+        model.addAttribute("libraries", libraryService.getAll());
         return "library/index";
     }
 
@@ -30,13 +30,13 @@ public class LibraryController {
 
     @PostMapping
     public String createLibrary(@ModelAttribute Library library) {
-        libraryService.addLibrary(library);
+        libraryService.add(library);
         return "redirect:/libraries";
     }
 
     @PostMapping("/{id}/delete")
     public String deleteLibrary(@PathVariable String id) {
-        libraryService.deleteLibrary(id);
+        libraryService.delete(id);
         return "redirect:/libraries";
     }
 }

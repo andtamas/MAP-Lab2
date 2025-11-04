@@ -18,7 +18,7 @@ public class ReadableItemController {
 
     @GetMapping
     public String listItems(Model model) {
-        model.addAttribute("items", readableItemService.getAllItems());
+        model.addAttribute("items", readableItemService.getAll());
         return "item/index";
     }
 
@@ -30,13 +30,13 @@ public class ReadableItemController {
 
     @PostMapping
     public String createItem(@ModelAttribute ReadableItem item) {
-        readableItemService.addItem(item);
+        readableItemService.add(item);
         return "redirect:/items";
     }
 
     @PostMapping("/{id}/delete")
     public String deleteItem(@PathVariable String id) {
-        readableItemService.deleteItem(id);
+        readableItemService.delete(id);
         return "redirect:/items";
     }
 }
