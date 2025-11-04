@@ -43,7 +43,7 @@ public class BookAuthorController {
 
     @PostMapping("/{id}/delete")
     public String deleteBookAuthor(@PathVariable String id) {
-        bookAuthorService.deleteBookAuthor(id);
+        bookAuthorService.delete(id);
         return "redirect:/bookauthors";
     }
 }
