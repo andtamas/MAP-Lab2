@@ -5,13 +5,15 @@ import java.util.List;
 public class Author {
     private String id;
     private String name;
+    private String nationality;
     private List<BookAuthor> books;
 
     public Author() {}
 
-    public Author(String id, String name, List<BookAuthor> books) {
+    public Author(String id, String name, String nationality, List<BookAuthor> books) {
         this.id = id;
         this.name = name;
+        this.nationality = nationality; // extra
         this.books = books;
     }
 
@@ -29,6 +31,14 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 
     public List<BookAuthor> getBooks() {

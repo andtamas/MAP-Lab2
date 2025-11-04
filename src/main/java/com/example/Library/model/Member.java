@@ -5,15 +5,17 @@ import java.util.List;
 public class Member {
     private String id;
     private String name;
+    private String email;
     private String libraryId;
     private List<Reservation> reservations;
     private List<Loan> loans;
 
     public Member() {}
 
-    public Member(String id, String name, String libraryId, List<Reservation> reservations, List<Loan> loans) {
+    public Member(String id, String name, String email, String libraryId, List<Reservation> reservations, List<Loan> loans) {
         this.id = id;
         this.name = name;
+        this.email = email; // extra
         this.libraryId = libraryId;
         this.reservations = reservations;
         this.loans = loans;
@@ -33,6 +35,14 @@ public class Member {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getLibraryId() {
