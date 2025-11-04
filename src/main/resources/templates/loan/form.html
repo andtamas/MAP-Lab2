@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Loan</title>
+</head>
+<body>
+<h1>Add Loan</h1>
+
+<form th:action="@{/loans}" th:object="${loan}" method="post">
+    ID: <input type="text" th:field="*{id}"/><br>
+    Member ID: <input type="text" th:field="*{memberId}"/><br>
+    Date: <input type="text" th:field="*{date}"/><br>
+    Reservations IDs (comma separated): <input type="text" th:field="*{reservationIds}"/><br>
+    Item IDs (comma separated): <input type="text" th:field="*{itemIds}"/><br>
+    <button type="submit">Add</button>
+</form>
+
+<a href="/loans">Back</a>
+
+</body>
+</html

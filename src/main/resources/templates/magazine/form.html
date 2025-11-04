@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Magazine</title>
+</head>
+<body>
+<h1>Add Magazine</h1>
+
+<form th:action="@{/magazines}" th:object="${magazine}" method="post">
+    ID: <input type="text" th:field="*{id}"/><br>
+    Title: <input type="text" th:field="*{title}"/><br>
+    Publisher: <input type="text" th:field="*{publisher}"/><br>
+    <button type="submit">Add</button>
+</form>
+
+<a href="/magazines">Back</a>
+
+</body>
+</html>
