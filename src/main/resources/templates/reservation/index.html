@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+</head>
+<body>
+<h1>Reservations</h1>
+
+<a th:href="@{/reservations/new}">Add New Reservation</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Member ID</th>
+        <th>Readable Item ID</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservation : ${reservations}">
+        <td th:text="${reservation.id}">ID</td>
+        <td th:text="${reservation.memberId}">Member ID</td>
+        <td th:text="${reservation.readableItemId}">Item ID</td>
+        <td th:text="${reservation.date}">Date</td>
+        <td th:text="${reservation.status}">Status</td>
+        <td>
+            <form th:action="@{|/reservations/${reservation.id}/delete|}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Reservation</title>
+</head>
+<body>
+<h1>Add Reservation</h1>
+
+<form th:action="@{/reservations}" th:object="${reservation}" method="post">
+    <label>ID: <input type="text" th:field="*{id}" /></label><br>
+    <label>Member ID: <input type="text" th:field="*{memberId}" /></label><br>
+    <label>Readable Item ID: <input type="text" th:field="*{readableItemId}" /></label><br>
+    <label>Date: <input type="text" th:field="*{date}" /></label><br>
+    <label>Status: <input type="text" th:field="*{status}" /></label><br>
+    <button type="submit">Add</button>
+</form>
+
+<a th:href="@{/reservations}">Back to list</a>
+</body>
+</html>
