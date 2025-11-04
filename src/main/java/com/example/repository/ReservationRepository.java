@@ -12,13 +12,22 @@ public class ReservationRepository {
         reservationList = new ArrayList<>();
     }
 
-    public void save (Reservation reservation) {
+    public void add (Reservation reservation) {
+        for (int i=0; i<reservationList.size(); i++) {
+            if (reservationList.get(i).getId().equals(reservation.getId())) {
+                throw new  IllegalArgumentException("Reservation already exists.");
+            }
+        }
+        reservationList.add(reservation);
+    }
+
+    public void update (Reservation reservation) {
         for (int i=0; i<reservationList.size(); i++) {
             if (reservationList.get(i).getId().equals(reservation.getId())) {
                 reservationList.set(i, reservation);
             }
         }
-        reservationList.add(reservation);
+        throw new IllegalArgumentException("Reservation already exists.");
     }
 
     public List<Reservation> getList() {

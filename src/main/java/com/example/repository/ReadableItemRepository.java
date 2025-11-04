@@ -12,13 +12,22 @@ public class ReadableItemRepository {
         itemList = new ArrayList<>();
     }
 
-    public void save(ReadableItem item) {
+    public void add(ReadableItem item) {
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getId().equals(item.getId())) {
+                throw new  IllegalArgumentException("Item already exists.");
+            }
+        }
+        itemList.add(item);
+    }
+
+    public void update(ReadableItem item) {
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getId().equals(item.getId())) {
                 itemList.set(i, item);
             }
         }
-        itemList.add(item);
+        throw new IllegalArgumentException("Item not found.");
     }
 
     public List<ReadableItem> getList() {

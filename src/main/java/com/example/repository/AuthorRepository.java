@@ -10,13 +10,22 @@ public class AuthorRepository {
         authorList = new ArrayList<>();
     }
 
-    public void save(Author author) {
+    public void add(Author author) {
+        for (int i=0; i<authorList.size(); i++) {
+            if (authorList.get(i).getId().equals(author.getId())) {
+                throw  new IllegalArgumentException("Author already exists.");
+            }
+        }
+        authorList.add(author);
+    }
+
+    public void update(Author author) {
         for (int i=0; i<authorList.size(); i++) {
             if (authorList.get(i).getId().equals(author.getId())) {
                 authorList.set(i, author);
             }
         }
-        authorList.add(author);
+        throw new IllegalArgumentException("Author not found.");
     }
 
     public List<Author> getList() {

@@ -10,13 +10,22 @@ public class BookDetailsRepository {
         bookList = new ArrayList<>();
     }
 
-    public void save(BookDetails bookDetails) {
+    public void add(BookDetails bookDetails) {
+        for (int i=0;i<bookList.size();i++){
+            if (bookList.get(i).getId().equals(bookDetails.getId())) {
+                throw new IllegalArgumentException("Book already exists");
+            }
+        }
+        bookList.add(bookDetails);
+    }
+
+    public void update(BookDetails bookDetails) {
         for (int i=0;i<bookList.size();i++){
             if (bookList.get(i).getId().equals(bookDetails.getId())) {
                 bookList.set(i,bookDetails);
             }
         }
-        bookList.add(bookDetails);
+        throw new IllegalArgumentException("Book not found.");
     }
 
     public List<BookDetails> getList() {

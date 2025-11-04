@@ -12,23 +12,23 @@ public class LibraryService {
         this.libraryRepository = new LibraryRepository();
     }
 
-    public void addLibrary(Library library) {
+    public void add(Library library) {
         libraryRepository.add(library);
     }
 
-    public void updateLibrary(Library library) {
+    public void update(Library library) {
         libraryRepository.update(library);
     }
 
-    public List<Library> getAllLibraries() {
+    public List<Library> getAll() {
         return libraryRepository.getList();
     }
 
-    public Library getLibraryById(String id) {
+    public Library getById(String id) {
        return libraryRepository.findById(id);
     }
 
-    public boolean deleteLibrary(String id) {
+    public boolean delete(String id) {
         return libraryRepository.delete(id);
     }
 }

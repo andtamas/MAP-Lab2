@@ -9,13 +9,22 @@ public class BookAuthorRepository {
         links = new ArrayList<>();
     }
 
-    public void save(BookAuthor link) {
+    public void add(BookAuthor link) {
+        for (int i = 0; i< links.size(); i++){
+            if (links.get(i).getId().equals(link.getId())) {
+                throw  new IllegalArgumentException("Link already exists.");
+            }
+        }
+        links.add(link);
+    }
+
+    public void update(BookAuthor link) {
         for (int i = 0; i< links.size(); i++){
             if (links.get(i).getId().equals(link.getId())) {
                 links.set(i, link);
             }
         }
-        links.add(link);
+        throw new IllegalArgumentException("Link not found.");
     }
 
     public List<BookAuthor> getList() {

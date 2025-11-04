@@ -11,27 +11,27 @@ public class MemberService {
         this.memberRepository = new MemberRepository();
     }
 
-    public void addMember(Member member) {
+    public void add(Member member) {
         memberRepository.add(member);
     }
 
-    public void updateMember(Member member) {
+    public void update(Member member) {
         memberRepository.update(member);
     }
 
-    public List<Member> getAllMembers() {
+    public List<Member> getAll() {
         return memberRepository.getList();
     }
 
-    public Member getMemberById(String id) {
+    public Member getById(String id) {
         return memberRepository.findById(id);
     }
 
-    public boolean deleteMember(String id) {
+    public boolean delete(String id) {
         return memberRepository.delete(id);
     }
 
-    public Member getMemberByLibraryId(String id) {
+    public Member getByLibraryId(String id) {
         return memberRepository.findByLibraryId(id);
     }
 }

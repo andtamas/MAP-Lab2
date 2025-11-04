@@ -10,13 +10,22 @@ public class MagazineDetailsRepository {
         magazineList = new ArrayList<>();
     }
 
-    public void save(MagazineDetails magazineDetails) {
+    public void add(MagazineDetails magazineDetails) {
+        for (int i=0; i<magazineList.size(); i++) {
+            if (magazineList.get(i).getId().equals(magazineDetails.getId())) {
+                throw new  IllegalArgumentException("Magazine details already exist.");
+            }
+        }
+        magazineList.add(magazineDetails);
+    }
+
+    public void update(MagazineDetails magazineDetails) {
         for (int i=0; i<magazineList.size(); i++) {
             if (magazineList.get(i).getId().equals(magazineDetails.getId())) {
                 magazineList.set(i, magazineDetails);
             }
         }
-        magazineList.add(magazineDetails);
+        throw  new  IllegalArgumentException("Magazine details not found.");
     }
 
     public List<MagazineDetails> getList() {

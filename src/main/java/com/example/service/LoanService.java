@@ -12,27 +12,27 @@ public class LoanService {
         this.loanRepository = new LoanRepository();
     }
 
-    public void addLoan(Loan loan) {
+    public void add(Loan loan) {
         loanRepository.add(loan);
     }
 
-    public void updateLoan(Loan loan) {
+    public void update(Loan loan) {
         loanRepository.update(loan);
     }
 
-    public List<Loan> getAllLoans() {
+    public List<Loan> getAll() {
         return loanRepository.getList();
     }
 
-    public Loan getLoanById(String id) {
+    public Loan getById(String id) {
         return loanRepository.findById(id);
     }
 
-    public boolean deleteLoan(String id) {
+    public boolean delete(String id) {
         return loanRepository.delete(id);
     }
 
-    public Loan getLoanByMemberId(String id) {
+    public Loan getByMemberId(String id) {
         return loanRepository.getByMemberId(id);
     }
 }
