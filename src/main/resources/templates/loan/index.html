@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Loans</title>
+</head>
+<body>
+<h1>Loans</h1>
+
+<a href="/loans/new">Add New Loan</a>
+
+<table border="1" cellpadding="4" cellspacing="0">
+    <tr>
+        <th>ID</th>
+        <th>Member ID</th>
+        <th>Date</th>
+        <th>Reservations</th>
+        <th>Items</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="loan : ${loans}">
+        <td th:text="${loan.id}">ID</td>
+        <td th:text="${loan.memberId}">Member ID</td>
+        <td th:text="${loan.date}">Date</td>
+        <td>
+            <span th:each="res : ${loan.reservations}" th:text="${res.id + ' '}"></span>
+        </td>
+        <td>
+            <span th:each="item : ${loan.items}" th:text="${item.id + ' '}"></span>
+        </td>
+        <td>
+            <form th:action="@{'/loans/' + ${loan.id} + '/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>
