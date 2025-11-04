@@ -9,7 +9,7 @@ public class MemberService {
     private MemberRepository memberRepository;
 
     public MemberService (MemberRepository memberRepository) {
-        this.memberRepository = new MemberRepository();
+        this.memberRepository = memberRepository;
     }
 
     public void add(Member member) {

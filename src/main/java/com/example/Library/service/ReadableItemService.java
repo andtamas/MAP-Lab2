@@ -9,7 +9,7 @@ public class ReadableItemService {
     private ReadableItemRepository readableItemRepository;
 
     public ReadableItemService(ReadableItemRepository readableItemRepository) {
-        this.readableItemRepository = new ReadableItemRepository();
+        this.readableItemRepository = readableItemRepository;
     }
 
     public void add(ReadableItem readableItem) {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <title>Readable Items</title>
+</head>
+<body>
+<h1>Readable Items</h1>
+
+<a href="/items/new">Add New Item</a>
+
+<table border="1" cellpadding="4" cellspacing="0">
+    <tr>
+        <th>ID</th>
+        <th>Publication ID</th>
+        <th>Barcode</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="item : ${items}">
+        <td th:text="${item.id}">ID</td>
+        <td th:text="${item.publicationId}">Publication ID</td>
+        <td th:text="${item.barcode}">Barcode</td>
+        <td th:text="${item.status}">Status</td>
+        <td>
+            <form th:action="@{'/items/' + ${item.id} + '/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

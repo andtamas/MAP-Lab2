@@ -11,7 +11,7 @@ public class LoanService {
     private LoanRepository loanRepository;
 
     public LoanService(LoanRepository loanRepository) {
-        this.loanRepository = new LoanRepository();
+        this.loanRepository = loanRepository;
     }
 
     public void add(Loan loan) {

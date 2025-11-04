@@ -10,7 +10,7 @@ public class BookDetailsService {
     private BookDetailsRepository bookDetailsRepository;
 
     public BookDetailsService(BookDetailsRepository bookDetailsRepository) {
-        this.bookDetailsRepository = new BookDetailsRepository();
+        this.bookDetailsRepository = bookDetailsRepository;
     }
 
     public void add(BookDetails bookDetails) {

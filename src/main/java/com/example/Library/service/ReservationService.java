@@ -9,7 +9,7 @@ public class ReservationService {
     private ReservationRepository reservationRepository;
 
     public ReservationService(ReservationRepository reservationRepository) {
-        this.reservationRepository = new ReservationRepository();
+        this.reservationRepository = reservationRepository;
     }
 
     public void add(Reservation reservation) {

@@ -10,8 +10,8 @@ public class MemberRepository {
     private List<Member> memberList;
 
     public MemberRepository() {
-        memberList = new ArrayList<Member>();
-    }
+        this.memberList = new ArrayList<>();
+    };
 
     public void add(Member member) {
         for (int i = 0; i < memberList.size(); i++) {

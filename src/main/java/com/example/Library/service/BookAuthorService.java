@@ -10,7 +10,7 @@ public class BookAuthorService {
     private BookAuthorRepository bookAuthorRepository;
 
     public BookAuthorService(BookAuthorRepository bookAuthorRepository) {
-        this.bookAuthorRepository = new BookAuthorRepository();
+        this.bookAuthorRepository = bookAuthorRepository;
     }
 
     public void add(BookAuthor bookAuthor) {

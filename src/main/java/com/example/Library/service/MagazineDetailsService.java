@@ -9,7 +9,7 @@ public class MagazineDetailsService {
     private MagazineDetailsRepository magazineDetailsRepository;
 
     public MagazineDetailsService(MagazineDetailsRepository magazineDetailsRepository) {
-        this.magazineDetailsRepository = new MagazineDetailsRepository();
+        this.magazineDetailsRepository = magazineDetailsRepository;
     }
 
     public void add(MagazineDetails magazineDetails) {
