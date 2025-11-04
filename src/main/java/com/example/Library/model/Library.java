@@ -1,5 +1,6 @@
 package com.example.Library.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
@@ -8,7 +9,10 @@ public class Library {
     private List<Member> members;
     private List<ReadableItem> readableItems;
 
-    public Library() {}
+    public Library() {
+        this.members = new ArrayList<>();
+        this.readableItems = new ArrayList<>();
+    }
 
     public Library(String id, String name, List<Member> members, List<ReadableItem> readableItems) {
         this.id = id;

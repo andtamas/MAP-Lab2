@@ -7,19 +7,19 @@
 <body>
 <h1>Libraries</h1>
 
-<a th:href="@{/libraries/new}">Add New Library</a>
+<p><a th:href="@{/libraries/new}">Add New Library</a></p>
 
-<table>
+<table border="1">
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Location</th>
         <th>Action</th>
     </tr>
+
     <tr th:each="library : ${libraries}">
-        <td th:text="${library.id}">ID</td>
-        <td th:text="${library.name}">Name</td>
-        <td th:text="${library.location}">Location</td>
+        <td th:text="${library.id}"></td>
+        <td th:text="${library.name}"></td>
         <td>
             <form th:action="@{'/libraries/' + ${library.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
@@ -27,6 +27,5 @@
         </td>
     </tr>
 </table>
-
 </body>
 </html>

@@ -10,7 +10,7 @@ public class LibraryService {
     private LibraryRepository libraryRepository;
 
     public LibraryService(LibraryRepository libraryRepository) {
-        this.libraryRepository = new LibraryRepository();
+        this.libraryRepository = libraryRepository;
     }
 
     public void add(Library library) {

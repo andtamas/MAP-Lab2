@@ -10,11 +10,9 @@
 <form th:action="@{/libraries}" th:object="${library}" method="post">
     ID: <input type="text" th:field="*{id}"/><br>
     Name: <input type="text" th:field="*{name}"/><br>
-    Location: <input type="text" th:field="*{location}"/><br>
     <button type="submit">Add</button>
 </form>
 
 <a th:href="@{/libraries}">Back</a>
-
 </body>
 </html>
