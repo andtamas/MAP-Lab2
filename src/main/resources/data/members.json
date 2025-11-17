@@ -1,0 +1,12 @@
+[
+  { "id": "MB1", "name": "John Smith", "email": "john@library.com", "libraryId": "LIB1", "reservations": [], "loans": [] },
+  { "id": "MB2", "name": "Maria Garcia", "email": "maria@library.com", "libraryId": "LIB1", "reservations": [], "loans": [] },
+  { "id": "MB3", "name": "Ivan Popov", "email": "ivan@library.com", "libraryId": "LIB2", "reservations": [], "loans": [] },
+  { "id": "MB4", "name": "Laura Rossi", "email": "laura@library.com", "libraryId": "LIB3", "reservations": [], "loans": [] },
+  { "id": "MB5", "name": "Anna Schmidt", "email": "anna@library.com", "libraryId": "LIB1", "reservations": [], "loans": [] },
+  { "id": "MB6", "name": "Michael Brown", "email": "michael@library.com", "libraryId": "LIB3", "reservations": [], "loans": [] },
+  { "id": "MB7", "name": "Sofia Müller", "email": "sofia@library.com", "libraryId": "LIB2", "reservations": [], "loans": [] },
+  { "id": "MB8", "name": "Alex Wilson", "email": "alex@library.com", "libraryId": "LIB2", "reservations": [], "loans": [] },
+  { "id": "MB9", "name": "Emily Clark", "email": "emily@library.com", "libraryId": "LIB1", "reservations": [], "loans": [] },
+  { "id": "MB10", "name": "David Johnson", "email": "david@library.com", "libraryId": "LIB3", "reservations": [], "loans": [] }
+]

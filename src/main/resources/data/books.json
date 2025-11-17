@@ -1,0 +1,12 @@
+[
+  { "id": "B1", "title": "The Shining", "genre": "Horror", "copies": [], "bookAuthors": [] },
+  { "id": "B2", "title": "Harry Potter", "genre": "Fantasy", "copies": [], "bookAuthors": [] },
+  { "id": "B3", "title": "A Game of Thrones", "genre": "Fantasy", "copies": [], "bookAuthors": [] },
+  { "id": "B4", "title": "Foundation", "genre": "Sci-Fi", "copies": [], "bookAuthors": [] },
+  { "id": "B5", "title": "Murder on the Orient Express", "genre": "Mystery", "copies": [], "bookAuthors": [] },
+  { "id": "B6", "title": "The Old Man and the Sea", "genre": "Classic", "copies": [], "bookAuthors": [] },
+  { "id": "B7", "title": "Adventures of Tom Sawyer", "genre": "Classic", "copies": [], "bookAuthors": [] },
+  { "id": "B8", "title": "20,000 Leagues Under the Seas", "genre": "Sci-Fi", "copies": [], "bookAuthors": [] },
+  { "id": "B9", "title": "War and Peace", "genre": "Historical", "copies": [], "bookAuthors": [] },
+  { "id": "B10", "title": "Kafka on the Shore", "genre": "Magical Realism", "copies": [], "bookAuthors": [] }
+]

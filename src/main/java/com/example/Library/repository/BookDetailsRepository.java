@@ -1,64 +1,11 @@
 package com.example.Library.repository;
+
 import com.example.Library.model.BookDetails;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.ArrayList;
 @Repository
-public class BookDetailsRepository {
-    private List<BookDetails> bookList;
-
+public class BookDetailsRepository extends InFileRepository<BookDetails> {
     public BookDetailsRepository() {
-        bookList = new ArrayList<>();
-    }
-
-    public void add(BookDetails bookDetails) {
-        for (int i=0;i<bookList.size();i++){
-            if (bookList.get(i).getId().equals(bookDetails.getId())) {
-                throw new IllegalArgumentException("Book already exists");
-            }
-        }
-        bookList.add(bookDetails);
-    }
-
-    public void update(BookDetails bookDetails) {
-        for (int i=0;i<bookList.size();i++){
-            if (bookList.get(i).getId().equals(bookDetails.getId())) {
-                bookList.set(i,bookDetails);
-            }
-        }
-        throw new IllegalArgumentException("Book not found.");
-    }
-
-    public List<BookDetails> getList() {
-        return bookList;
-    }
-
-    public BookDetails findById(String id) {
-        for (int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).getId().equals(id)) {
-                return bookList.get(i);
-            }
-        }
-        return null;
-    }
-
-    public boolean delete(String id) {
-        for (int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).getId().equals(id)) {
-                bookList.remove(i);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public BookDetails findByTitle(String title) {
-        for (int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).getTitle().equals(title)) {
-                return bookList.get(i);
-            }
-        }
-        return null;
+        super("src/main/resources/data/books.json", BookDetails.class);
     }
 }
