@@ -14,7 +14,7 @@ public class BookDetailsService {
     }
 
     public void add(BookDetails bookDetails) {
-        bookDetailsRepository.add(bookDetails);
+        bookDetailsRepository.save(bookDetails);
     }
 
     public void update(BookDetails bookDetails) {
@@ -22,18 +22,15 @@ public class BookDetailsService {
     }
 
     public List<BookDetails> getAll() {
-        return bookDetailsRepository.getList();
+        return bookDetailsRepository.findAll();
     }
 
     public BookDetails getById(String id) {
         return bookDetailsRepository.findById(id);
     }
 
-    public boolean delete(String id) {
-        return bookDetailsRepository.delete(id);
+    public void delete(String id) {
+        bookDetailsRepository.delete(id);
     }
 
-    public BookDetails getByTitle(String name) {
-        return bookDetailsRepository.findByTitle(name);
-    }
 }

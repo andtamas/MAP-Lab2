@@ -15,7 +15,7 @@ public class LoanService {
     }
 
     public void add(Loan loan) {
-        loanRepository.add(loan);
+        loanRepository.save(loan);
     }
 
     public void update(Loan loan) {
@@ -23,18 +23,14 @@ public class LoanService {
     }
 
     public List<Loan> getAll() {
-        return loanRepository.getList();
+        return loanRepository.findAll();
     }
 
     public Loan getById(String id) {
         return loanRepository.findById(id);
     }
 
-    public boolean delete(String id) {
-        return loanRepository.delete(id);
-    }
-
-    public Loan getByMemberId(String id) {
-        return loanRepository.getByMemberId(id);
+    public void delete(String id) {
+        loanRepository.delete(id);
     }
 }

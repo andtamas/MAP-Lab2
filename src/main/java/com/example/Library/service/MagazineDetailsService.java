@@ -13,7 +13,7 @@ public class MagazineDetailsService {
     }
 
     public void add(MagazineDetails magazineDetails) {
-        magazineDetailsRepository.add(magazineDetails);
+        magazineDetailsRepository.save(magazineDetails);
     }
 
     public void update(MagazineDetails magazineDetails) {
@@ -21,19 +21,15 @@ public class MagazineDetailsService {
     }
 
     public List<MagazineDetails> getAll() {
-        return magazineDetailsRepository.getList();
+        return magazineDetailsRepository.findAll();
     }
 
     public MagazineDetails getById(String id) {
         return magazineDetailsRepository.findById(id);
     }
 
-    public boolean delete(String id) {
-        return magazineDetailsRepository.delete(id);
-    }
-
-    public List<MagazineDetails> getByPublisher(String publisher) {
-        return magazineDetailsRepository.findByPublisher(publisher);
+    public void delete(String id) {
+        magazineDetailsRepository.delete(id);
     }
 
 }

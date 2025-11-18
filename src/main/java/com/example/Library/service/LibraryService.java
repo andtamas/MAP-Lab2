@@ -14,7 +14,7 @@ public class LibraryService {
     }
 
     public void add(Library library) {
-        libraryRepository.add(library);
+        libraryRepository.save(library);
     }
 
     public void update(Library library) {
@@ -22,14 +22,13 @@ public class LibraryService {
     }
 
     public List<Library> getAll() {
-        return libraryRepository.getList();
+        return libraryRepository.findAll();
     }
 
     public Library getById(String id) {
        return libraryRepository.findById(id);
     }
 
-    public boolean delete(String id) {
-        return libraryRepository.delete(id);
+    public void delete(String id) {libraryRepository.delete(id);
     }
 }

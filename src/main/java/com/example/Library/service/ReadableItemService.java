@@ -13,7 +13,7 @@ public class ReadableItemService {
     }
 
     public void add(ReadableItem readableItem) {
-        this.readableItemRepository.add(readableItem);
+        this.readableItemRepository.save(readableItem);
     }
 
     public void update(ReadableItem readableItem) {
@@ -21,14 +21,14 @@ public class ReadableItemService {
     }
 
     public List<ReadableItem> getAll() {
-        return readableItemRepository.getList();
+        return readableItemRepository.findAll();
     }
 
     public ReadableItem getById(String id) {
         return readableItemRepository.findById(id);
     }
 
-    public boolean delete(String id) {
-        return readableItemRepository.delete(id);
+    public void delete(String id) {
+        readableItemRepository.delete(id);
     }
 }

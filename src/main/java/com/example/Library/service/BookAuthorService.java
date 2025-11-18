@@ -14,7 +14,7 @@ public class BookAuthorService {
     }
 
     public void add(BookAuthor bookAuthor) {
-        bookAuthorRepository.add(bookAuthor);
+        bookAuthorRepository.save(bookAuthor);
     }
 
     public void update(BookAuthor bookAuthor) {
@@ -22,14 +22,14 @@ public class BookAuthorService {
     }
 
     public List<BookAuthor> getAll() {
-        return bookAuthorRepository.getList();
+        return bookAuthorRepository.findAll();
     }
 
     public BookAuthor getById(String id) {
         return bookAuthorRepository.findById(id);
     }
 
-    public boolean delete(String id) {
-        return bookAuthorRepository.delete(id);
+    public void delete(String id) {
+        bookAuthorRepository.delete(id);
     }
 }

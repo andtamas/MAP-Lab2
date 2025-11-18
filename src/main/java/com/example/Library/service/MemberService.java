@@ -13,7 +13,7 @@ public class MemberService {
     }
 
     public void add(Member member) {
-        memberRepository.add(member);
+        memberRepository.save(member);
     }
 
     public void update(Member member) {
@@ -21,18 +21,14 @@ public class MemberService {
     }
 
     public List<Member> getAll() {
-        return memberRepository.getList();
+        return memberRepository.findAll();
     }
 
     public Member getById(String id) {
         return memberRepository.findById(id);
     }
 
-    public boolean delete(String id) {
-        return memberRepository.delete(id);
-    }
-
-    public Member getByLibraryId(String id) {
-        return memberRepository.findByLibraryId(id);
+    public void delete(String id) {
+        memberRepository.delete(id);
     }
 }

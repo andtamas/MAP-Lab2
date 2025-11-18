@@ -13,7 +13,7 @@ public class ReservationService {
     }
 
     public void add(Reservation reservation) {
-        reservationRepository.add(reservation);
+        reservationRepository.save(reservation);
     }
 
     public void update(Reservation reservation) {
@@ -21,22 +21,14 @@ public class ReservationService {
     }
 
     public List<Reservation> getAll() {
-        return reservationRepository.getList();
+        return reservationRepository.findAll();
     }
 
     public Reservation getById(String id) {
         return reservationRepository.findById(id);
     }
 
-    public boolean delete(String id) {
-        return reservationRepository.delete(id);
-    }
-
-    public Reservation getByUserId(String userId) {
-        return reservationRepository.findByMemberId(userId);
-    }
-
-    public Reservation getByStatus(String status) {
-        return reservationRepository.findByStatus(status);
+    public void delete(String id) {
+        reservationRepository.delete(id);
     }
 }
