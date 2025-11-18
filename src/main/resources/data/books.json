@@ -2,8 +2,10 @@
   {
     "id": "B1",
     "title": "Clean Code",
-    "genre": "Programming",
-    "copies": ["IT1", "IT2"],
+    "copies": [
+      { "id": "IT1", "publicationId": "B1", "status": "ACTIVE" },
+      { "id": "IT2", "publicationId": "B1", "status": "COMPLETED" }
+    ],
     "bookAuthors": [
       { "id": "BA1", "bookId": "B1", "authorId": "A1" }
     ]
@@ -11,8 +13,9 @@
   {
     "id": "B2",
     "title": "The Pragmatic Programmer",
-    "genre": "Programming",
-    "copies": ["IT3"],
+    "copies": [
+      { "id": "IT3", "publicationId": "B2", "status": "ACTIVE" }
+    ],
     "bookAuthors": [
       { "id": "BA2", "bookId": "B2", "authorId": "A2" }
     ]
@@ -20,8 +23,10 @@
   {
     "id": "B3",
     "title": "Effective Java",
-    "genre": "Programming",
-    "copies": ["IT4", "IT5"],
+    "copies": [
+      { "id": "IT4", "publicationId": "B3", "status": "ACTIVE" },
+      { "id": "IT5", "publicationId": "B3", "status": "CANCELLED" }
+    ],
     "bookAuthors": [
       { "id": "BA3", "bookId": "B3", "authorId": "A3" }
     ]
@@ -29,8 +34,9 @@
   {
     "id": "B4",
     "title": "Design Patterns",
-    "genre": "Software Engineering",
-    "copies": ["IT6"],
+    "copies": [
+      { "id": "IT6", "publicationId": "B4", "status": "COMPLETED" }
+    ],
     "bookAuthors": [
       { "id": "BA4", "bookId": "B4", "authorId": "A4" }
     ]
@@ -38,8 +44,9 @@
   {
     "id": "B5",
     "title": "Introduction to Algorithms",
-    "genre": "Computer Science",
-    "copies": ["IT7"],
+    "copies": [
+      { "id": "IT7", "publicationId": "B5", "status": "ACTIVE" }
+    ],
     "bookAuthors": [
       { "id": "BA5", "bookId": "B5", "authorId": "A5" }
     ]
@@ -47,8 +54,9 @@
   {
     "id": "B6",
     "title": "Refactoring",
-    "genre": "Programming",
-    "copies": ["IT8"],
+    "copies": [
+      { "id": "IT8", "publicationId": "B6", "status": "COMPLETED" }
+    ],
     "bookAuthors": [
       { "id": "BA6", "bookId": "B6", "authorId": "A6" }
     ]
@@ -56,8 +64,10 @@
   {
     "id": "B7",
     "title": "Code Complete",
-    "genre": "Programming",
-    "copies": ["IT9", "IT10"],
+    "copies": [
+      { "id": "IT9", "publicationId": "B7", "status": "ACTIVE" },
+      { "id": "IT10", "publicationId": "B7", "status": "COMPLETED" }
+    ],
     "bookAuthors": [
       { "id": "BA7", "bookId": "B7", "authorId": "A7" }
     ]
@@ -65,8 +75,9 @@
   {
     "id": "B8",
     "title": "Head First Design Patterns",
-    "genre": "Software Engineering",
-    "copies": ["IT11"],
+    "copies": [
+      { "id": "IT11", "publicationId": "B8", "status": "ACTIVE" }
+    ],
     "bookAuthors": [
       { "id": "BA8", "bookId": "B8", "authorId": "A8" }
     ]
@@ -74,8 +85,9 @@
   {
     "id": "B9",
     "title": "Working Effectively with Legacy Code",
-    "genre": "Software Engineering",
-    "copies": ["IT12"],
+    "copies": [
+      { "id": "IT12", "publicationId": "B9", "status": "CANCELLED" }
+    ],
     "bookAuthors": [
       { "id": "BA9", "bookId": "B9", "authorId": "A9" }
     ]
@@ -83,8 +95,9 @@
   {
     "id": "B10",
     "title": "The Mythical Man-Month",
-    "genre": "Project Management",
-    "copies": ["IT13"],
+    "copies": [
+      { "id": "IT13", "publicationId": "B10", "status": "ACTIVE" }
+    ],
     "bookAuthors": [
       { "id": "BA10", "bookId": "B10", "authorId": "A10" }
     ]
