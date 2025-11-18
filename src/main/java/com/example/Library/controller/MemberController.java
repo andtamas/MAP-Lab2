@@ -34,7 +34,7 @@ public class MemberController {
         return "redirect:/members";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/detail")
     public String viewMember(@PathVariable String id, Model model) {
         model.addAttribute("member", memberService.getById(id));
         return "member/detail";

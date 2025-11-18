@@ -1,5 +1,16 @@
-[
-  { "id": "LIB1", "name": "Central Library", "members": [], "readableItems": [] },
-  { "id": "LIB2", "name": "City Library", "members": [], "readableItems": [] },
-  { "id": "LIB3", "name": "University Library", "members": [], "readableItems": [] }
-]
+[ {
+  "id" : "LIB1",
+  "name" : "Central Library",
+  "members" : [ ],
+  "readableItems" : [ ]
+}, {
+  "id" : "LIB2",
+  "name" : "City Library",
+  "members" : [ ],
+  "readableItems" : [ ]
+}, {
+  "id" : "LIB3",
+  "name" : "University Library",
+  "members" : [ ],
+  "readableItems" : [ ]
+} ]

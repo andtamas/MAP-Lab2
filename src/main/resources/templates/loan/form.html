@@ -2,20 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Loan</title>
+    <title th:text="${loan.id} != null ? 'Edit Loan' : 'Add Loan'"></title>
 </head>
 <body>
-<h1>Add Loan</h1>
+<h1 th:text="${loan.id} != null ? 'Edit Loan' : 'Add Loan'"></h1>
 
-<form th:action="@{/loans}" th:object="${loan}" method="post">
-    ID: <input type="text" th:field="*{id}"/><br>
-    Member ID: <input type="text" th:field="*{memberId}"/><br>
-    Date: <input type="text" th:field="*{date}"/><br>
-    <button type="submit">Add</button>
+<form th:action="@{${loan.id} != null ? '/loans/' + ${loan.id} + '/update' : '/loans'}"
+      th:object="${loan}" method="post">
+
+    <label>ID: <input type="text" th:field="*{id}" th:readonly="${loan.id} != null"/></label><br>
+    <label>Member ID: <input type="text" th:field="*{memberId}"/></label><br>
+    <label>Date: <input type="text" th:field="*{date}"/></label><br>
+    <button type="submit" th:text="${loan.id} != null ? 'Update' : 'Add'"></button>
 </form>
 
-
 <a href="/loans">Back</a>
-
 </body>
 </html>

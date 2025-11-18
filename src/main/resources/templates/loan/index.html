@@ -5,8 +5,8 @@
     <title>Loans</title>
 </head>
 <body>
-<h1>Loans</h1>
 
+<h1>Loans</h1>
 <a href="/loans/new">Add New Loan</a>
 
 <table border="1" cellpadding="4" cellspacing="0">
@@ -16,13 +16,13 @@
         <th>Date</th>
         <th>Reservations</th>
         <th>Items</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
 
     <tr th:each="loan : ${loans}">
-        <td th:text="${loan.id}">ID</td>
-        <td th:text="${loan.memberId}">Member ID</td>
-        <td th:text="${loan.date}">Date</td>
+        <td th:text="${loan.id}"></td>
+        <td th:text="${loan.memberId}"></td>
+        <td th:text="${loan.date}"></td>
         <td>
             <span th:each="res : ${loan.reservations}" th:text="${res.id + ' '}"></span>
         </td>
@@ -30,13 +30,20 @@
             <span th:each="item : ${loan.items}" th:text="${item.id + ' '}"></span>
         </td>
         <td>
-            <form th:action="@{'/loans/' + ${loan.id} + '/delete'}" method="post">
+            <form th:action="@{'/loans/' + ${loan.id} + '/detail'}" method="get" style="display:inline">
+                <button type="submit">View</button>
+            </form>
+
+            <form th:action="@{'/loans/' + ${loan.id} + '/edit'}" method="get" style="display:inline">
+                <button type="submit">Edit</button>
+            </form>
+
+            <form th:action="@{'/loans/' + ${loan.id} + '/delete'}" method="post" style="display:inline">
                 <button type="submit">Delete</button>
             </form>
         </td>
     </tr>
 
 </table>
-
 </body>
 </html>

@@ -13,14 +13,20 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
 
     <tr th:each="author : ${authors}">
         <td th:text="${author.id}">ID</td>
         <td th:text="${author.name}">Name</td>
         <td>
-            <form th:action="@{'/authors/' + ${author.id} + '/delete'}" method="post">
+            <form th:action="@{'/authors/' + ${author.id} + '/detail'}" method="get" style="display:inline">
+                <button type="submit">View</button>
+            </form>
+            <form th:action="@{'/authors/' + ${author.id} + '/edit'}" method="get" style="display:inline">
+                <button type="submit">Edit</button>
+            </form>
+            <form th:action="@{'/authors/' + ${author.id} + '/delete'}" method="post" style="display:inline">
                 <button type="submit">Delete</button>
             </form>
         </td>

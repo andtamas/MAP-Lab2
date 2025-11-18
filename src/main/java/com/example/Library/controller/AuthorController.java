@@ -1,6 +1,7 @@
 package com.example.Library.controller;
 
 import com.example.Library.model.Author;
+import com.example.Library.model.BookAuthor;
 import com.example.Library.service.AuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,11 +35,24 @@ public class AuthorController {
         return "redirect:/authors";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/detail")
     public String viewAuthor(@PathVariable String id, Model model) {
         Author author = authorService.getById(id);
         model.addAttribute("author", author);
         return "author/detail";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable String id, Model model) {
+        model.addAttribute("author", authorService.getById(id));
+        return "author/form";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateBookAuthor(@PathVariable String id, @ModelAttribute Author author) {
+        author.setId(id);
+        authorService.update(author);
+        return "redirect:/authors";
     }
 
     @PostMapping("/{id}/delete")

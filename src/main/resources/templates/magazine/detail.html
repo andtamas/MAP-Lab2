@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Magazine Details</title>
+</head>
+<body>
+
+<h1>Magazine Details</h1>
+
+<p><strong>ID:</strong> <span th:text="${magazine.id}"></span></p>
+<p><strong>Title:</strong> <span th:text="${magazine.title}"></span></p>
+<p><strong>Publisher:</strong> <span th:text="${magazine.publisher}"></span></p>
+
+<form th:action="@{'/magazines/' + ${magazine.id} + '/edit'}" method="get" style="display:inline">
+    <button type="submit">Edit</button>
+</form>
+
+<form th:action="@{'/magazines/' + ${magazine.id} + '/delete'}" method="post" style="display:inline">
+    <button type="submit">Delete</button>
+</form>
+
+<a href="/magazines">Back</a>
+
+</body>
+</html>

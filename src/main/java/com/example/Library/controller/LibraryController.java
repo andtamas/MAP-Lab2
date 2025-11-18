@@ -34,6 +34,25 @@ public class LibraryController {
         return "redirect:/libraries";
     }
 
+    @GetMapping("/{id}/detail")
+    public String viewLibrary(@PathVariable String id, Model model) {
+        model.addAttribute("library", libraryService.getById(id));
+        return "library/detail";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable String id, Model model) {
+        model.addAttribute("library", libraryService.getById(id));
+        return "library/form";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateLibrary(@PathVariable String id, @ModelAttribute Library library) {
+        library.setId(id);
+        libraryService.update(library);
+        return "redirect:/libraries";
+    }
+
     @PostMapping("/{id}/delete")
     public String deleteLibrary(@PathVariable String id) {
         libraryService.delete(id);

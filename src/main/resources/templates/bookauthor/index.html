@@ -5,8 +5,8 @@
     <title>BookAuthors</title>
 </head>
 <body>
-<h1>BookAuthors</h1>
 
+<h1>BookAuthors</h1>
 <a href="/bookauthors/new">Add New BookAuthor</a>
 
 <table border="1" cellpadding="4" cellspacing="0">
@@ -14,20 +14,25 @@
         <th>ID</th>
         <th>Book ID</th>
         <th>Author ID</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
 
     <tr th:each="bookAuthor : ${bookAuthors}">
-        <td th:text="${bookAuthor.id}">ID</td>
-        <td th:text="${bookAuthor.bookId}">Book ID</td>
-        <td th:text="${bookAuthor.authorId}">Author ID</td>
+        <td th:text="${bookAuthor.id}"></td>
+        <td th:text="${bookAuthor.bookId}"></td>
+        <td th:text="${bookAuthor.authorId}"></td>
         <td>
-            <form th:action="@{'/bookauthors/' + ${bookAuthor.id} + '/delete'}" method="post">
+            <form th:action="@{'/bookauthors/' + ${bookAuthor.id} + '/detail'}" method="get" style="display:inline">
+                <button type="submit">View</button>
+            </form>
+            <form th:action="@{'/bookauthors/' + ${bookAuthor.id} + '/edit'}" method="get" style="display:inline">
+                <button type="submit">Edit</button>
+            </form>
+            <form th:action="@{'/bookauthors/' + ${bookAuthor.id} + '/delete'}" method="post" style="display:inline">
                 <button type="submit">Delete</button>
             </form>
         </td>
     </tr>
-
 </table>
 
 </body>

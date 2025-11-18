@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Details</title>
+</head>
+<body>
+
+<h1>Loan Details</h1>
+
+<p><strong>ID:</strong> <span th:text="${loan.id}"></span></p>
+<p><strong>Member ID:</strong> <span th:text="${loan.memberId}"></span></p>
+<p><strong>Date:</strong> <span th:text="${loan.date}"></span></p>
+
+<p><strong>Reservations:</strong>
+    <span th:each="res : ${loan.reservations}" th:text="${res.id + ' '}"></span>
+</p>
+
+<p><strong>Items:</strong>
+    <span th:each="item : ${loan.items}" th:text="${item.id + ' '}"></span>
+</p>
+
+<form th:action="@{'/loans/' + ${loan.id} + '/edit'}" method="get" style="display:inline">
+    <button type="submit">Edit</button>
+</form>
+
+<form th:action="@{'/loans/' + ${loan.id} + '/delete'}" method="post" style="display:inline">
+    <button type="submit">Delete</button>
+</form>
+
+<a href="/loans">Back</a>
+</body>
+</html>

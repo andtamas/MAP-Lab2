@@ -5,26 +5,33 @@
     <title>Libraries</title>
 </head>
 <body>
-<h1>Libraries</h1>
 
+<h1>Libraries</h1>
 <p><a th:href="@{/libraries/new}">Add New Library</a></p>
 
-<table border="1">
+<table border="1" cellpadding="4" cellspacing="0">
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
 
     <tr th:each="library : ${libraries}">
         <td th:text="${library.id}"></td>
         <td th:text="${library.name}"></td>
         <td>
-            <form th:action="@{'/libraries/' + ${library.id} + '/delete'}" method="post">
+            <form th:action="@{'/libraries/' + ${library.id} + '/detail'}" method="get" style="display:inline">
+                <button type="submit">View</button>
+            </form>
+            <form th:action="@{'/libraries/' + ${library.id} + '/edit'}" method="get" style="display:inline">
+                <button type="submit">Edit</button>
+            </form>
+            <form th:action="@{'/libraries/' + ${library.id} + '/delete'}" method="post" style="display:inline">
                 <button type="submit">Delete</button>
             </form>
         </td>
     </tr>
 </table>
+
 </body>
 </html>

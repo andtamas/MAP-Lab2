@@ -34,11 +34,25 @@ public class BookDetailsController {
         return "redirect:/books";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/detail")
     public String viewBook(@PathVariable String id, Model model) {
         BookDetails book = bookDetailsService.getById(id);
         model.addAttribute("book", book);
-        return "book/detail";  // templates/book/detail.html (opțional)
+        return "book/detail";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable String id, Model model) {
+        BookDetails book = bookDetailsService.getById(id);
+        model.addAttribute("book", book);
+        return "book/form";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateBook(@PathVariable String id, @ModelAttribute BookDetails book) {
+        book.setId(id);
+        bookDetailsService.update(book);
+        return "redirect:/books";
     }
 
     @PostMapping("/{id}/delete")

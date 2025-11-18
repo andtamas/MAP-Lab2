@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Details</title>
+</head>
+<body>
+
+<h1>Library Details</h1>
+
+<p><strong>ID:</strong> <span th:text="${library.id}"></span></p>
+<p><strong>Name:</strong> <span th:text="${library.name}"></span></p>
+
+<form th:action="@{'/libraries/' + ${library.id} + '/edit'}" method="get" style="display:inline">
+    <button type="submit">Edit</button>
+</form>
+
+<form th:action="@{'/libraries/' + ${library.id} + '/delete'}" method="post" style="display:inline">
+    <button type="submit">Delete</button>
+</form>
+
+<a th:href="@{/libraries}">Back</a>
+</body>
+</html>

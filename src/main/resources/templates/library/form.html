@@ -2,15 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Library</title>
+    <title th:text="${library.id} != null ? 'Edit Library' : 'Add Library'"></title>
 </head>
 <body>
-<h1>Add Library</h1>
+<h1 th:text="${library.id} != null ? 'Edit Library' : 'Add Library'"></h1>
 
-<form th:action="@{/libraries}" th:object="${library}" method="post">
-    ID: <input type="text" th:field="*{id}"/><br>
-    Name: <input type="text" th:field="*{name}"/><br>
-    <button type="submit">Add</button>
+<form th:action="@{${library.id} != null ? '/libraries/' + ${library.id} + '/update' : '/libraries'}"
+      th:object="${library}" method="post">
+    <label>ID: <input type="text" th:field="*{id}" th:readonly="${library.id} != null"/></label><br>
+    <label>Name: <input type="text" th:field="*{name}"/></label><br>
+    <button type="submit" th:text="${library.id} != null ? 'Update' : 'Add'"></button>
 </form>
 
 <a th:href="@{/libraries}">Back</a>

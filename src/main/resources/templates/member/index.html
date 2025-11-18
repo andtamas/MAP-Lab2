@@ -22,7 +22,7 @@
         <td th:text="${member.name}">Name</td>
         <td th:text="${member.libraryId}">Library ID</td>
         <td>
-            <form th:action="@{'/members/' + ${member.id}}" method="get" style="display:inline">
+            <form th:action="@{'/members/' + ${member.id} + '/detail'}" method="get" style="display:inline">
                 <button type="submit">View</button>
             </form>
             <form th:action="@{'/members/' + ${member.id} + '/edit'}" method="get" style="display:inline">

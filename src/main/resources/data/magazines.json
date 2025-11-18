@@ -1,12 +1,51 @@
-[
-  { "id": "M1", "title": "National Geographic", "copies": [], "publisher": "National Geographic Society" },
-  { "id": "M2", "title": "Time", "copies": [], "publisher": "Time USA LLC" },
-  { "id": "M3", "title": "Forbes", "copies": [], "publisher": "Forbes Media" },
-  { "id": "M4", "title": "The Economist", "copies": [], "publisher": "The Economist Group" },
-  { "id": "M5", "title": "Nature", "copies": [], "publisher": "Springer Nature" },
-  { "id": "M6", "title": "Science", "copies": [], "publisher": "AAAS" },
-  { "id": "M7", "title": "Vogue", "copies": [], "publisher": "Condé Nast" },
-  { "id": "M8", "title": "Wired", "copies": [], "publisher": "Condé Nast" },
-  { "id": "M9", "title": "Popular Mechanics", "copies": [], "publisher": "Hearst Communications" },
-  { "id": "M10", "title": "Sports Illustrated", "copies": [], "publisher": "The Arena Group" }
-]
+[ {
+  "id" : "M1",
+  "title" : "National Geographic",
+  "copies" : [ ],
+  "publisher" : "National Geographic Society"
+}, {
+  "id" : "M2",
+  "title" : "Time",
+  "copies" : [ ],
+  "publisher" : "Time USA LLC"
+}, {
+  "id" : "M3",
+  "title" : "Forbes",
+  "copies" : [ ],
+  "publisher" : "Forbes Media"
+}, {
+  "id" : "M4",
+  "title" : "The Economist",
+  "copies" : [ ],
+  "publisher" : "The Economist Group"
+}, {
+  "id" : "M5",
+  "title" : "Nature",
+  "copies" : [ ],
+  "publisher" : "Springer Nature"
+}, {
+  "id" : "M6",
+  "title" : "Science",
+  "copies" : [ ],
+  "publisher" : "AAAS"
+}, {
+  "id" : "M7",
+  "title" : "Vogue",
+  "copies" : [ ],
+  "publisher" : "Condé Nast"
+}, {
+  "id" : "M8",
+  "title" : "Wired",
+  "copies" : [ ],
+  "publisher" : "Condé Nast"
+}, {
+  "id" : "M9",
+  "title" : "Popular Mechanics",
+  "copies" : [ ],
+  "publisher" : "Hearst Communications"
+}, {
+  "id" : "M10",
+  "title" : "Sports Illustrated",
+  "copies" : [ ],
+  "publisher" : "The Arena Group"
+} ]

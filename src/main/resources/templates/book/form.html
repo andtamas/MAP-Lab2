@@ -2,15 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Book</title>
+    <title>Add/Edit Book</title>
 </head>
 <body>
-<h1>Add Book</h1>
 
-<form th:action="@{/books}" th:object="${book}" method="post">
-    ID: <input type="text" th:field="*{id}"/><br>
+<h1>Add/Edit Book</h1>
+
+<form th:action="${book.id == null} ? @{/books} : @{'/books/' + ${book.id} + '/edit'}"
+      th:object="${book}" method="post">
+    ID: <input type="text" th:field="*{id}" th:readonly="${book.id != null}"/><br>
     Title: <input type="text" th:field="*{title}"/><br>
-    <button type="submit">Add</button>
+    <button type="submit">Submit</button>
 </form>
 
 <a href="/books">Back</a>

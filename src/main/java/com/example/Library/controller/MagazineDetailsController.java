@@ -34,10 +34,23 @@ public class MagazineDetailsController {
         return "redirect:/magazines";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/detail")
     public String viewMagazine(@PathVariable String id, Model model) {
         model.addAttribute("magazine", magazineDetailsService.getById(id));
         return "magazine/detail";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable String id, Model model) {
+        model.addAttribute("magazine", magazineDetailsService.getById(id));
+        return "magazine/form";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateMagazine(@PathVariable String id, @ModelAttribute MagazineDetails magazine) {
+        magazine.setId(id);
+        magazineDetailsService.update(magazine);
+        return "redirect:/magazines";
     }
 
     @PostMapping("/{id}/delete")

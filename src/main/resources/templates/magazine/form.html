@@ -2,16 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Magazine</title>
+    <title th:text="${magazine.id} != null ? 'Edit Magazine' : 'Add Magazine'"></title>
 </head>
 <body>
-<h1>Add Magazine</h1>
 
-<form th:action="@{/magazines}" th:object="${magazine}" method="post">
-    ID: <input type="text" th:field="*{id}"/><br>
-    Title: <input type="text" th:field="*{title}"/><br>
-    Publisher: <input type="text" th:field="*{publisher}"/><br>
-    <button type="submit">Add</button>
+<h1 th:text="${magazine.id} != null ? 'Edit Magazine' : 'Add Magazine'"></h1>
+
+<form th:action="@{${magazine.id} != null ? '/magazines/' + ${magazine.id} + '/update' : '/magazines'}"
+      th:object="${magazine}" method="post">
+
+    <label>ID:
+        <input type="text" th:field="*{id}" th:readonly="${magazine.id} != null"/>
+    </label>
+    <br>
+
+    <label>Title:
+        <input type="text" th:field="*{title}"/>
+    </label>
+    <br>
+
+    <label>Publisher:
+        <input type="text" th:field="*{publisher}"/>
+    </label>
+    <br>
+
+    <button type="submit" th:text="${magazine.id} != null ? 'Update' : 'Add'"></button>
 </form>
 
 <a href="/magazines">Back</a>
