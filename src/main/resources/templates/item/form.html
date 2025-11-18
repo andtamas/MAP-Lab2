@@ -6,12 +6,18 @@
 <body>
 <h1>Add Readable Item</h1>
 
-<form th:action="@{/items}" th:object="${item}" method="post">
-    ID: <input type="text" th:field="*{id}"/><br>
-    Publication ID: <input type="text" th:field="*{publicationId}"/><br>
-    Barcode: <input type="text" th:field="*{barcode}"/><br>
-    Status: <input type="text" th:field="*{status}"/><br>
-    <button type="submit">Add</button>
+<form th:action="${#strings.isEmpty(item.id) ? '/items' : '/items/' + item.id + '/edit'}"
+      th:object="${item}" method="post">
+    <label>ID: <input type="text" th:field="*{id}" th:readonly="${item.id != null}"/></label><br>
+    <label>Publication ID: <input type="text" th:field="*{publicationId}"/></label><br>
+    <label>Barcode: <input type="text" th:field="*{barcode}"/></label><br>
+    <label>Status:
+        <select th:field="*{status}">
+            <option th:each="s : ${T(com.example.Library.model.ReservationStatus).values()}"
+                    th:value="${s}" th:text="${s}"></option>
+        </select>
+    </label><br>
+    <button type="submit" th:text="${item.id == null ? 'Add' : 'Update'}"></button>
 </form>
 
 <a href="/items">Back</a>

@@ -23,7 +23,15 @@
         <td th:text="${item.barcode}">Barcode</td>
         <td th:text="${item.status}">Status</td>
         <td>
-            <form th:action="@{'/items/' + ${item.id} + '/delete'}" method="post">
+            <form th:action="@{'/items/' + ${item.id} + '/detail'}" method="get" style="display:inline;">
+                <button type="submit">View</button>
+            </form>
+
+            <form th:action="@{'/items/' + ${item.id} + '/edit'}" method="get" style="display:inline;">
+                <button type="submit">Edit</button>
+            </form>
+
+            <form th:action="@{'/items/' + ${item.id} + '/delete'}" method="post" style="display:inline;">
                 <button type="submit">Delete</button>
             </form>
         </td>

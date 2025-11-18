@@ -7,19 +7,13 @@
 <body>
 <h1>Add Member</h1>
 
-<form action="/members" method="post">
-    <label for="id">ID:</label>
-    <input type="text" id="id" name="id"><br>
-
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name"><br>
-
-    <label for="libraryId">Library ID:</label>
-    <input type="text" id="libraryId" name="libraryId"><br>
-
-    <button type="submit">Add</button>
+<form th:action="@{${member.id} != null ? '/members/' + ${member.id} + '/update' : '/members'}"
+      th:object="${member}" method="post">
+    <label>ID: <input type="text" th:field="*{id}" th:readonly="${member.id} != null"/></label><br>
+    <label>Name: <input type="text" th:field="*{name}"/></label><br>
+    <label>Library ID: <input type="text" th:field="*{libraryId}"/></label><br>
+    <button type="submit" th:text="${member.id} != null ? 'Update' : 'Add'"></button>
 </form>
-
 <a href="/members">Back</a>
 </body>
 </html>

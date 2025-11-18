@@ -1,0 +1,13 @@
+<h1>Member Details</h1>
+
+<p>ID: <span th:text="${member.id}"></span></p>
+<p>Name: <span th:text="${member.name}"></span></p>
+<p>Library ID: <span th:text="${member.libraryId}"></span></p>
+
+<form th:action="@{'/members/' + ${member.id} + '/edit'}" method="get" style="display:inline">
+    <button type="submit">Edit</button>
+</form>
+<form th:action="@{'/members/' + ${member.id} + '/delete'}" method="post" style="display:inline">
+    <button type="submit">Delete</button>
+</form>
+<a href="/members">Back</a>

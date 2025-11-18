@@ -28,7 +28,15 @@
         <td th:text="${reservation.date}">Date</td>
         <td th:text="${reservation.status}">Status</td>
         <td>
-            <form th:action="@{|/reservations/${reservation.id}/delete|}" method="post">
+            <form th:action="@{'/reservations/' + ${reservation.id} + '/detail'}" method="get" style="display:inline;">
+                <button type="submit">View</button>
+            </form>
+
+            <form th:action="@{'/reservations/' + ${reservation.id} + '/edit'}" method="get" style="display:inline;">
+                <button type="submit">Edit</button>
+            </form>
+
+            <form th:action="@{|/reservations/${reservation.id}/delete|}" method="post" style="display:inline;">
                 <button type="submit">Delete</button>
             </form>
         </td>

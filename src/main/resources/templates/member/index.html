@@ -14,7 +14,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Library ID</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
 
     <tr th:each="member : ${members}">
@@ -22,6 +22,12 @@
         <td th:text="${member.name}">Name</td>
         <td th:text="${member.libraryId}">Library ID</td>
         <td>
+            <form th:action="@{'/members/' + ${member.id}}" method="get" style="display:inline">
+                <button type="submit">View</button>
+            </form>
+            <form th:action="@{'/members/' + ${member.id} + '/edit'}" method="get" style="display:inline">
+                <button type="submit">Edit</button>
+            </form>
             <form th:action="@{'/members/' + ${member.id} + '/delete'}" method="post" style="display:inline">
                 <button type="submit">Delete</button>
             </form>

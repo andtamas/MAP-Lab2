@@ -34,6 +34,25 @@ public class MemberController {
         return "redirect:/members";
     }
 
+    @GetMapping("/{id}")
+    public String viewMember(@PathVariable String id, Model model) {
+        model.addAttribute("member", memberService.getById(id));
+        return "member/detail";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable String id, Model model) {
+        model.addAttribute("member", memberService.getById(id));
+        return "member/form";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateMember(@PathVariable String id, @ModelAttribute Member member) {
+        member.setId(id);
+        memberService.update(member);
+        return "redirect:/members";
+    }
+
     @PostMapping("/{id}/delete")
     public String deleteMember(@PathVariable String id) {
         memberService.delete(id);

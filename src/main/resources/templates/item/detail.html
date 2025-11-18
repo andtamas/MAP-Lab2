@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Details</title>
+</head>
+<body>
+<h1>Item Details</h1>
+
+<p>ID: <span th:text="${item.id}"></span></p>
+<p>Publication ID: <span th:text="${item.publicationId}"></span></p>
+<p>Barcode: <span th:text="${item.barcode}"></span></p>
+<p>Status: <span th:text="${item.status}"></span></p>
+
+<form th:action="@{'/items/' + ${item.id} + '/edit'}" method="get" style="display:inline;">
+    <button type="submit">Edit</button>
+</form>
+<form th:action="@{/items}" method="get" style="display:inline;">
+    <button type="submit">Back</button>
+</form>
+</body>
+</html>

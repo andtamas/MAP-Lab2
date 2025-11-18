@@ -4,11 +4,11 @@ public class ReadableItem {
     private String id;
     private String publicationId;
     private String barcode;
-    private String status; // Available / Borrowed / Reserved
+    private ReservationStatus status; // Available / Borrowed / Reserved
 
     public ReadableItem() {}
 
-    public ReadableItem(String id, String publicationId, String barcode, String status) {
+    public ReadableItem(String id, String publicationId, String barcode, ReservationStatus status) {
         this.id = id;
         this.publicationId = publicationId;
         this.barcode = barcode;
@@ -39,11 +39,11 @@ public class ReadableItem {
         this.barcode = barcode;
     }
 
-    public String getStatus() {
+    public ReservationStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ReservationStatus status) {
         this.status = status;
     }
 }

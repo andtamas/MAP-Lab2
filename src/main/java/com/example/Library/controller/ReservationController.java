@@ -34,10 +34,25 @@ public class ReservationController {
         return "redirect:/reservations";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/detail")
     public String viewReservation(@PathVariable String id, Model model) {
         model.addAttribute("reservation", reservationService.getById(id));
         return "reservation/detail";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable String id, Model model) {
+        Reservation reservation = reservationService.getById(id);
+        model.addAttribute("reservation", reservation);
+        return "reservation/form";
+    }
+
+    // Process update
+    @PostMapping("/{id}/edit")
+    public String updateReservation(@PathVariable String id, @ModelAttribute Reservation reservation) {
+        reservation.setId(id);
+        reservationService.update(reservation);
+        return "redirect:/reservations";
     }
 
     @PostMapping("/{id}/delete")

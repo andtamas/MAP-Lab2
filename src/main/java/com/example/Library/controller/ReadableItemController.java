@@ -34,6 +34,26 @@ public class ReadableItemController {
         return "redirect:/items";
     }
 
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable String id, Model model) {
+        ReadableItem item = readableItemService.getById(id);
+        model.addAttribute("item", item);
+        return "item/form";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateItem(@PathVariable String id, @ModelAttribute ReadableItem item) {
+        item.setId(id);
+        readableItemService.update(item);
+        return "redirect:/items";
+    }
+
+    @GetMapping("/{id}/detail")
+    public String viewItemDetails(@PathVariable String id, Model model) {
+        ReadableItem item = readableItemService.getById(id);
+        model.addAttribute("item", item);
+        return "item/detail";
+    }
     @PostMapping("/{id}/delete")
     public String deleteItem(@PathVariable String id) {
         readableItemService.delete(id);
