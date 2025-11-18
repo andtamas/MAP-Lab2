@@ -1,1 +1,12 @@
-[ ]
+[
+  { "id": "L1", "memberId": "MB1", "date": "2025-01-10", "reservations": [], "items": [] },
+  { "id": "L2", "memberId": "MB2", "date": "2025-01-11", "reservations": [], "items": [] },
+  { "id": "L3", "memberId": "MB3", "date": "2025-01-12", "reservations": [], "items": [] },
+  { "id": "L4", "memberId": "MB4", "date": "2025-01-15", "reservations": [], "items": [] },
+  { "id": "L5", "memberId": "MB5", "date": "2025-01-18", "reservations": [], "items": [] },
+  { "id": "L6", "memberId": "MB6", "date": "2025-01-20", "reservations": [], "items": [] },
+  { "id": "L7", "memberId": "MB7", "date": "2025-01-21", "reservations": [], "items": [] },
+  { "id": "L8", "memberId": "MB8", "date": "2025-01-23", "reservations": [], "items": [] },
+  { "id": "L9", "memberId": "MB9", "date": "2025-01-24", "reservations": [], "items": [] },
+  { "id": "L10", "memberId": "MB10", "date": "2025-01-25", "reservations": [], "items": [] }
+]

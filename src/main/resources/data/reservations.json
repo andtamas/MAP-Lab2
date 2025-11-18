@@ -1,1 +1,12 @@
-[ ]
+[
+  { "id": "R1", "memberId": "MB1", "readableItemId": "IT1", "date": "2025-01-12", "status": "Active" },
+  { "id": "R2", "memberId": "MB2", "readableItemId": "IT2", "date": "2025-01-15", "status": "Completed" },
+  { "id": "R3", "memberId": "MB3", "readableItemId": "IT3", "date": "2025-01-16", "status": "Cancelled" },
+  { "id": "R4", "memberId": "MB4", "readableItemId": "IT4", "date": "2025-01-17", "status": "Active" },
+  { "id": "R5", "memberId": "MB5", "readableItemId": "IT5", "date": "2025-01-20", "status": "Completed" },
+  { "id": "R6", "memberId": "MB6", "readableItemId": "IT6", "date": "2025-01-22", "status": "Active" },
+  { "id": "R7", "memberId": "MB7", "readableItemId": "IT7", "date": "2025-01-25", "status": "Active" },
+  { "id": "R8", "memberId": "MB8", "readableItemId": "IT8", "date": "2025-01-26", "status": "Cancelled" },
+  { "id": "R9", "memberId": "MB9", "readableItemId": "IT9", "date": "2025-01-27", "status": "Completed" },
+  { "id": "R10", "memberId": "MB10", "readableItemId": "IT10", "date": "2025-01-28", "status": "Active" }
+]

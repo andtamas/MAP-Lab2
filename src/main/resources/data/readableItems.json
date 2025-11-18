@@ -1,1 +1,12 @@
-[ ]
+[
+  { "id": "IT1", "publicationId": "B1", "status": "Available" },
+  { "id": "IT2", "publicationId": "B2", "status": "Loaned" },
+  { "id": "IT3", "publicationId": "B3", "status": "Available" },
+  { "id": "IT4", "publicationId": "B4", "status": "Reserved" },
+  { "id": "IT5", "publicationId": "B5", "status": "Available" },
+  { "id": "IT6", "publicationId": "B6", "status": "Loaned" },
+  { "id": "IT7", "publicationId": "B7", "status": "Available" },
+  { "id": "IT8", "publicationId": "B8", "status": "Loaned" },
+  { "id": "IT9", "publicationId": "B9", "status": "Reserved" },
+  { "id": "IT10", "publicationId": "B10", "status": "Available" }
+]
