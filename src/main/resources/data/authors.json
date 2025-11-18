@@ -1,12 +1,51 @@
-[
-  { "id": "A1", "name": "Stephen King", "nationality": "USA", "books": [] },
-  { "id": "A2", "name": "J.K. Rowling", "nationality": "UK", "books": [] },
-  { "id": "A3", "name": "George R.R. Martin", "nationality": "USA", "books": [] },
-  { "id": "A4", "name": "Isaac Asimov", "nationality": "Russia/USA", "books": [] },
-  { "id": "A5", "name": "Agatha Christie", "nationality": "UK", "books": [] },
-  { "id": "A6", "name": "Ernest Hemingway", "nationality": "USA", "books": [] },
-  { "id": "A7", "name": "Mark Twain", "nationality": "USA", "books": [] },
-  { "id": "A8", "name": "Jules Verne", "nationality": "France", "books": [] },
-  { "id": "A9", "name": "Leo Tolstoy", "nationality": "Russia", "books": [] },
-  { "id": "A10", "name": "Haruki Murakami", "nationality": "Japan", "books": [] }
-]
+[ {
+  "id" : "A1",
+  "name" : "Stephen King",
+  "nationality" : "USA",
+  "books" : [ ]
+}, {
+  "id" : "A2",
+  "name" : "J.K. Rowling",
+  "nationality" : "UK",
+  "books" : [ ]
+}, {
+  "id" : "A3",
+  "name" : "George R.R. Martin",
+  "nationality" : "USA",
+  "books" : [ ]
+}, {
+  "id" : "A4",
+  "name" : "Isaac Asimov",
+  "nationality" : "Russia/USA",
+  "books" : [ ]
+}, {
+  "id" : "A5",
+  "name" : "Agatha Christie",
+  "nationality" : "UK",
+  "books" : [ ]
+}, {
+  "id" : "A6",
+  "name" : "Ernest Hemingway",
+  "nationality" : "USA",
+  "books" : [ ]
+}, {
+  "id" : "A7",
+  "name" : "Mark Twain",
+  "nationality" : "USA",
+  "books" : [ ]
+}, {
+  "id" : "A8",
+  "name" : "Jules Verne",
+  "nationality" : "France",
+  "books" : [ ]
+}, {
+  "id" : "A9",
+  "name" : "Leo Tolstoy",
+  "nationality" : "Russia",
+  "books" : [ ]
+}, {
+  "id" : "A10",
+  "name" : "Haruki Murakami",
+  "nationality" : "Japan",
+  "books" : [ ]
+} ]

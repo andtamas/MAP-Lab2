@@ -5,11 +5,11 @@ public class Reservation {
     private String memberId;
     private String readableItemId;
     private String date;
-    private String status; // Active / Cancelled / Completed
+    private ReservationStatus status; // Active / Cancelled / Completed
 
     public Reservation() {}
 
-    public Reservation(String id, String memberId, String readableItemId, String date, String status) {
+    public Reservation(String id, String memberId, String readableItemId, String date, ReservationStatus status) {
         this.id = id;
         this.memberId = memberId;
         this.readableItemId = readableItemId;
@@ -49,11 +49,11 @@ public class Reservation {
         this.date = date;
     }
 
-    public String getStatus() {
+    public ReservationStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ReservationStatus status) {
         this.status = status;
     }
 }

@@ -21,7 +21,7 @@ public class InFileRepository<T> implements AbstractRepository<T> {
     private void load() {
         try {
             if (file.exists()) {
-                data = mapper.readValue(file, new TypeReference<List<T>>() {});
+                data = mapper.readValue(file, mapper.getTypeFactory().constructCollectionType(List.class, type));
             } else {
                 data = new ArrayList<>();
                 saveToFile();
