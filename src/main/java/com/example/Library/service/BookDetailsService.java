@@ -7,7 +7,7 @@ import java.util.List;
 @Service
 public class BookDetailsService {
 
-    private BookDetailsRepository bookDetailsRepository;
+    private final BookDetailsRepository bookDetailsRepository;
 
     public BookDetailsService(BookDetailsRepository bookDetailsRepository) {
         this.bookDetailsRepository = bookDetailsRepository;

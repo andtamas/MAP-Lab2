@@ -1,61 +1,92 @@
-[ {
-  "id" : "B1",
-  "title" : "The Shining",
-  "copies" : [ ],
-  "genre" : "Horror",
-  "bookAuthors" : [ ]
-}, {
-  "id" : "B2",
-  "title" : "Harry Potter",
-  "copies" : [ ],
-  "genre" : "Fantasy",
-  "bookAuthors" : [ ]
-}, {
-  "id" : "B3",
-  "title" : "A Game of Thrones",
-  "copies" : [ ],
-  "genre" : "Fantasy",
-  "bookAuthors" : [ ]
-}, {
-  "id" : "B4",
-  "title" : "Foundation",
-  "copies" : [ ],
-  "genre" : "Sci-Fi",
-  "bookAuthors" : [ ]
-}, {
-  "id" : "B5",
-  "title" : "Murder on the Orient Express",
-  "copies" : [ ],
-  "genre" : "Mystery",
-  "bookAuthors" : [ ]
-}, {
-  "id" : "B6",
-  "title" : "The Old Man and the Sea",
-  "copies" : [ ],
-  "genre" : "Classic",
-  "bookAuthors" : [ ]
-}, {
-  "id" : "B7",
-  "title" : "Adventures of Tom Sawyer",
-  "copies" : [ ],
-  "genre" : "Classic",
-  "bookAuthors" : [ ]
-}, {
-  "id" : "B8",
-  "title" : "20,000 Leagues Under the Seas",
-  "copies" : [ ],
-  "genre" : "Sci-Fi",
-  "bookAuthors" : [ ]
-}, {
-  "id" : "B9",
-  "title" : "War and Peace",
-  "copies" : [ ],
-  "genre" : "Historical",
-  "bookAuthors" : [ ]
-}, {
-  "id" : "B10",
-  "title" : "Kafka on the Shore",
-  "copies" : [ ],
-  "genre" : "Magical Realism",
-  "bookAuthors" : [ ]
-} ]
+[
+  {
+    "id": "B1",
+    "title": "Clean Code",
+    "genre": "Programming",
+    "copies": ["IT1", "IT2"],
+    "bookAuthors": [
+      { "id": "BA1", "bookId": "B1", "authorId": "A1" }
+    ]
+  },
+  {
+    "id": "B2",
+    "title": "The Pragmatic Programmer",
+    "genre": "Programming",
+    "copies": ["IT3"],
+    "bookAuthors": [
+      { "id": "BA2", "bookId": "B2", "authorId": "A2" }
+    ]
+  },
+  {
+    "id": "B3",
+    "title": "Effective Java",
+    "genre": "Programming",
+    "copies": ["IT4", "IT5"],
+    "bookAuthors": [
+      { "id": "BA3", "bookId": "B3", "authorId": "A3" }
+    ]
+  },
+  {
+    "id": "B4",
+    "title": "Design Patterns",
+    "genre": "Software Engineering",
+    "copies": ["IT6"],
+    "bookAuthors": [
+      { "id": "BA4", "bookId": "B4", "authorId": "A4" }
+    ]
+  },
+  {
+    "id": "B5",
+    "title": "Introduction to Algorithms",
+    "genre": "Computer Science",
+    "copies": ["IT7"],
+    "bookAuthors": [
+      { "id": "BA5", "bookId": "B5", "authorId": "A5" }
+    ]
+  },
+  {
+    "id": "B6",
+    "title": "Refactoring",
+    "genre": "Programming",
+    "copies": ["IT8"],
+    "bookAuthors": [
+      { "id": "BA6", "bookId": "B6", "authorId": "A6" }
+    ]
+  },
+  {
+    "id": "B7",
+    "title": "Code Complete",
+    "genre": "Programming",
+    "copies": ["IT9", "IT10"],
+    "bookAuthors": [
+      { "id": "BA7", "bookId": "B7", "authorId": "A7" }
+    ]
+  },
+  {
+    "id": "B8",
+    "title": "Head First Design Patterns",
+    "genre": "Software Engineering",
+    "copies": ["IT11"],
+    "bookAuthors": [
+      { "id": "BA8", "bookId": "B8", "authorId": "A8" }
+    ]
+  },
+  {
+    "id": "B9",
+    "title": "Working Effectively with Legacy Code",
+    "genre": "Software Engineering",
+    "copies": ["IT12"],
+    "bookAuthors": [
+      { "id": "BA9", "bookId": "B9", "authorId": "A9" }
+    ]
+  },
+  {
+    "id": "B10",
+    "title": "The Mythical Man-Month",
+    "genre": "Project Management",
+    "copies": ["IT13"],
+    "bookAuthors": [
+      { "id": "BA10", "bookId": "B10", "authorId": "A10" }
+    ]
+  }
+]
