@@ -1,10 +1,29 @@
 package com.example.Library.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "readable_items")
 public class ReadableItem {
+
+    @Id
+    @NotBlank(message = "ID-ul exemplarului este obligatoriu.")
     private String id;
+
+    @Transient
+    @NotBlank(message = "ID-ul publicației este obligatoriu.")
     private String publicationId;
+
+    @NotBlank(message = "Codul de bare este obligatoriu.")
     private String barcode;
+
+    @Enumerated(EnumType.STRING)
     private ReservationStatus status; // Available / Borrowed / Reserved
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "library_id")
+    private Library library;
 
     public ReadableItem() {}
 
@@ -45,5 +64,23 @@ public class ReadableItem {
 
     public void setStatus(ReservationStatus status) {
         this.status = status;
+    }
+
+    public Library getLibrary() {
+        return library;
+    }
+
+    public void setLibrary(Library library) {
+        this.library = library;
+    }
+
+    @Override
+    public String toString() {
+        return "ReadableItem{" +
+                "id='" + id + '\'' +
+                ", publicationId='" + publicationId + '\'' +
+                ", barcode='" + barcode + '\'' +
+                ", status=" + status +
+                '}';
     }
 }

@@ -1,9 +1,9 @@
 package com.example.Library.service;
+
 import com.example.Library.model.BookDetails;
 import com.example.Library.repository.BookDetailsRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 public class BookDetailsService {
 
@@ -13,24 +13,26 @@ public class BookDetailsService {
         this.bookDetailsRepository = bookDetailsRepository;
     }
 
-    public void add(BookDetails bookDetails) {
-        bookDetailsRepository.save(bookDetails);
+    public BookDetails updateBook(Long id, BookDetails bookDetailsDetails) {
+        BookDetails book = bookDetailsRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
+
+        book.setTitle(bookDetailsDetails.getTitle());
+        book.setAuthor(bookDetailsDetails.getAuthor());
+        book.setPublisher(bookDetailsDetails.getPublisher());
+        book.setYear(bookDetailsDetails.getYear());
+
+        return bookDetailsRepository.save(book); // aici se face update
     }
 
-    public void update(BookDetails bookDetails) {
-        bookDetailsRepository.update(bookDetails);
+    public BookDetails getBookById(Long id) {
+        return bookDetailsRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
     }
 
-    public List<BookDetails> getAll() {
-        return bookDetailsRepository.findAll();
+    public void deleteBook(Long id) {
+        BookDetails book = bookDetailsRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
+        bookDetailsRepository.delete(book);
     }
-
-    public BookDetails getById(String id) {
-        return bookDetailsRepository.findById(id);
-    }
-
-    public void delete(String id) {
-        bookDetailsRepository.delete(id);
-    }
-
 }

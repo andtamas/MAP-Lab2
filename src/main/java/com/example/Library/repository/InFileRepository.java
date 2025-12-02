@@ -1,6 +1,6 @@
 package com.example.Library.repository;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.example.Library.model.BookDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.util.*;
@@ -47,9 +47,10 @@ public class InFileRepository<T> implements AbstractRepository<T> {
     }
 
     @Override
-    public void save(T entity) {
+    public BookDetails save(T entity) {
         data.add(entity);
         saveToFile();
+        return null;
     }
 
     @Override

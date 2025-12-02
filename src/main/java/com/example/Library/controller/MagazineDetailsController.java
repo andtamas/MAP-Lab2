@@ -1,61 +1,65 @@
 package com.example.Library.controller;
 
 import com.example.Library.model.MagazineDetails;
-import com.example.Library.service.MagazineDetailsService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import com.example.Library.repository.MagazineDetailsRepository;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/magazines")
-public class MagazineDetailsController {
+import java.util.List;
 
-    private final MagazineDetailsService magazineDetailsService;
+@RestController
+@RequestMapping("/api/magazines")
+public class MagazineDetailsRestController {
 
-    public MagazineDetailsController(MagazineDetailsService magazineDetailsService) {
-        this.magazineDetailsService = magazineDetailsService;
+    private final MagazineDetailsRepository magazineDetailsRepository;
+
+    public MagazineDetailsRestController(MagazineDetailsRepository magazineDetailsRepository) {
+        this.magazineDetailsRepository = magazineDetailsRepository;
     }
 
+    // Obține toate revistele
     @GetMapping
-    public String listMagazines(Model model) {
-        model.addAttribute("magazines", magazineDetailsService.getAll());
-        return "magazine/index";
+    public List<MagazineDetails> getAllMagazines() {
+        return magazineDetailsRepository.findAll();
     }
 
-    @GetMapping("/new")
-    public String showCreateForm(Model model) {
-        model.addAttribute("magazine", new MagazineDetails());
-        return "magazine/form";
+    // Obține o revistă după ID
+    @GetMapping("/{id}")
+    public ResponseEntity<MagazineDetails> getMagazineById(@PathVariable String id) {
+        return magazineDetailsRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
+    // Creează o revistă nouă
     @PostMapping
-    public String createMagazine(@ModelAttribute MagazineDetails magazine) {
-        magazineDetailsService.add(magazine);
-        return "redirect:/magazines";
+    public MagazineDetails createMagazine(@Valid @RequestBody MagazineDetails magazineDetails) {
+        return magazineDetailsRepository.save(magazineDetails);
     }
 
-    @GetMapping("/{id}/detail")
-    public String viewMagazine(@PathVariable String id, Model model) {
-        model.addAttribute("magazine", magazineDetailsService.getById(id));
-        return "magazine/detail";
+    // Actualizează o revistă (CORECTAT)
+    @PutMapping("/{id}")
+    public ResponseEntity<MagazineDetails> updateMagazine(@PathVariable String id,
+                                                          @Valid @RequestBody MagazineDetails magazineDetailsDetails) {
+        return magazineDetailsRepository.findById(id).map(magazine -> {
+            // Actualizăm câmpurile care există pe model (Titlu și Publisher)
+            magazine.setTitle(magazineDetailsDetails.getTitle());
+            magazine.setPublisher(magazineDetailsDetails.getPublisher()); // Câmpul specific MagazineDetails
+
+            // Asigurăm că ID-ul este setat corect (deși @PathVariable ar trebui să-l gestioneze)
+            magazine.setId(id);
+
+            return ResponseEntity.ok(magazineDetailsRepository.save(magazine));
+        }).orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/{id}/edit")
-    public String showEditForm(@PathVariable String id, Model model) {
-        model.addAttribute("magazine", magazineDetailsService.getById(id));
-        return "magazine/form";
-    }
-
-    @PostMapping("/{id}/update")
-    public String updateMagazine(@PathVariable String id, @ModelAttribute MagazineDetails magazine) {
-        magazine.setId(id);
-        magazineDetailsService.update(magazine);
-        return "redirect:/magazines";
-    }
-
-    @PostMapping("/{id}/delete")
-    public String deleteMagazine(@PathVariable String id) {
-        magazineDetailsService.delete(id);
-        return "redirect:/magazines";
+    // Șterge o revistă
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMagazine(@PathVariable String id) {
+        return magazineDetailsRepository.findById(id).map(magazine -> {
+            magazineDetailsRepository.delete(magazine);
+            return ResponseEntity.noContent().<Void>build();
+        }).orElse(ResponseEntity.notFound().build());
     }
 }

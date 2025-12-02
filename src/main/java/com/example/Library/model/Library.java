@@ -18,9 +18,11 @@ public class Library {
     @Size(min = 3, message = "Numele trebuie să aibă minim 3 caractere.")
     private String name;
 
+    // Relatia One-to-Many cu Member
     @OneToMany(mappedBy = "library", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Member> members = new ArrayList<>();
 
+    // Relatia One-to-Many cu ReadableItem
     @OneToMany(mappedBy = "library", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReadableItem> readableItems = new ArrayList<>();
 
@@ -61,5 +63,35 @@ public class Library {
 
     public void setReadableItems(List<ReadableItem> readableItems) {
         this.readableItems = readableItems;
+    }
+
+    public void addMember(Member member) {
+        members.add(member);
+        member.setLibrary(this);
+    }
+
+    public void removeMember(Member member) {
+        members.remove(member);
+        member.setLibrary(null);
+    }
+
+    public void addReadableItem(ReadableItem item) {
+        readableItems.add(item);
+        item.setLibrary(this);
+    }
+
+    public void removeReadableItem(ReadableItem item) {
+        readableItems.remove(item);
+        item.setLibrary(null);
+    }
+
+    @Override
+    public String toString() {
+        return "Library{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", members=" + members.size() +
+                ", readableItems=" + readableItems.size() +
+                '}';
     }
 }

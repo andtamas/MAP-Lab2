@@ -1,11 +1,17 @@
 package com.example.Library.model;
 
+import jakarta.persistence.*;
 import java.util.List;
 
-
+@MappedSuperclass
 public abstract class Publication {
+
+    @Id
     private String id;
+
     private String title;
+
+    @OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReadableItem> copies;
 
     public Publication() {}

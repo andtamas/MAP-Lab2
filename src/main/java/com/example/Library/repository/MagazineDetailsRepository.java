@@ -1,11 +1,11 @@
 package com.example.Library.repository;
 
 import com.example.Library.model.MagazineDetails;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+// DEVINE INTERFAȚĂ JPA
 @Repository
-public class MagazineDetailsRepository extends InFileRepository<MagazineDetails> {
-    public MagazineDetailsRepository() {
-        super("src/main/resources/data/magazines.json", MagazineDetails.class);
-    }
+public interface MagazineDetailsRepository extends JpaRepository<MagazineDetails, String> {
+    // String este tipul ID-ului moștenit.
 }
