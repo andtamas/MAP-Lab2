@@ -4,11 +4,6 @@
   "nationality" : "USA",
   "books" : [ ]
 }, {
-  "id" : "A2",
-  "name" : "J.K. Rowling",
-  "nationality" : "UK",
-  "books" : [ ]
-}, {
   "id" : "A3",
   "name" : "George R.R. Martin",
   "nationality" : "USA",
