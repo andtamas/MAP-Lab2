@@ -1,24 +1,34 @@
 package com.example.Library.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "libraries")
 public class Library {
+
+    @Id
+    @NotBlank(message = "ID-ul bibliotecii este obligatoriu.")
     private String id;
+
+    @NotBlank(message = "Numele este obligatoriu.")
+    @Size(min = 3, message = "Numele trebuie să aibă minim 3 caractere.")
     private String name;
-    private List<Member> members;
-    private List<ReadableItem> readableItems;
 
-    public Library() {
-        this.members = new ArrayList<>();
-        this.readableItems = new ArrayList<>();
-    }
+    @OneToMany(mappedBy = "library", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Member> members = new ArrayList<>();
 
-    public Library(String id, String name, List<Member> members, List<ReadableItem> readableItems) {
+    @OneToMany(mappedBy = "library", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReadableItem> readableItems = new ArrayList<>();
+
+    public Library() {}
+
+    public Library(String id, String name) {
         this.id = id;
         this.name = name;
-        this.members = members;
-        this.readableItems = readableItems;
     }
 
     public String getId() {

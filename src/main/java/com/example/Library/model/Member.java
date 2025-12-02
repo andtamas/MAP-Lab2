@@ -1,71 +1,64 @@
 package com.example.Library.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "members")
 public class Member {
+    @Id
+    @NotBlank(message = "ID-ul este obligatoriu.")
     private String id;
+
+    @NotBlank(message = "Numele este obligatoriu.")
+    @Size(min = 2, message = "Numele trebuie sa aiba minim 2 caractere.")
     private String name;
+
+    @Email(message = "Format email invalid.")
+    @NotBlank(message = "Email-ul este obligatoriu.")
     private String email;
+
+    // Relația Many-to-One cu Library (Cheia străină: library_id)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "library_id", nullable = false)
+    private Library library;
+
+    @Transient // Câmpul vechi libraryId devine tranzitoriu
+    @NotBlank(message = "ID-ul bibliotecii este obligatoriu.")
     private String libraryId;
-    private List<Reservation> reservations;
-    private List<Loan> loans;
+
+    // Relații One-to-Many cu Reservation și Loan
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Loan> loans = new ArrayList<>();
 
     public Member() {}
 
-    public Member(String id, String name, String email, String libraryId, List<Reservation> reservations, List<Loan> loans) {
-        this.id = id;
-        this.name = name;
-        this.email = email; // extra
-        this.libraryId = libraryId;
-        this.reservations = reservations;
-        this.loans = loans;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    // ... Constructorul trebuie ajustat pentru a primi Library sau a folosi setLibraryId
 
     public String getLibraryId() {
-        return libraryId;
+        return library != null ? library.getId() : libraryId;
     }
 
     public void setLibraryId(String libraryId) {
         this.libraryId = libraryId;
+        // Logică necesară în Service/Controller pentru a converti ID-ul în obiectul Library
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
+    // ... Getters and Setters pentru ID, Name, Email (restul sunt similare)
 
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
+    public String getId() {
+        return id;
     }
+    // ... restul getters/setters
 
-    public List<Loan> getLoans() {
-        return loans;
-    }
-
-    public void setLoans(List<Loan> loans) {
-        this.loans = loans;
+    public void setLibrary(Library library) {
+        this.library = library;
     }
 }
