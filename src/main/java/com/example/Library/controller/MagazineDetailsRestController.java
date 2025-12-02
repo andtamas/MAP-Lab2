@@ -38,23 +38,25 @@ public class MagazineDetailsRestController {
         return magazineDetailsRepository.save(magazineDetails);
     }
 
-    // Actualizează o revistă (CORECTAT)
+    // Actualizează o revistă
     @PutMapping("/{id}")
     public ResponseEntity<MagazineDetails> updateMagazine(@PathVariable String id,
                                                           @Valid @RequestBody MagazineDetails magazineDetailsDetails) {
         return magazineDetailsRepository.findById(id).map(magazine -> {
-            // Actualizăm câmpurile care există pe model (Titlu și Publisher)
-            magazine.setTitle(magazineDetailsDetails.getTitle());
-            magazine.setPublisher(magazineDetailsDetails.getPublisher()); // Câmpul specific MagazineDetails
 
-            // Asigurăm că ID-ul este setat corect (deși @PathVariable ar trebui să-l gestioneze)
+            // 1. Actualizează câmpurile moștenite (Title)
+            magazine.setTitle(magazineDetailsDetails.getTitle());
+
+            // 2. Actualizează câmpul propriu (Editor) - FIX
+            magazine.setEditor(magazineDetailsDetails.getEditor());
+
             magazine.setId(id);
 
             return ResponseEntity.ok(magazineDetailsRepository.save(magazine));
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    // Șterge o revistă
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMagazine(@PathVariable String id) {
         return magazineDetailsRepository.findById(id).map(magazine -> {
