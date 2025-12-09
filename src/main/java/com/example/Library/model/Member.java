@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull; // Adăugat
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Table(name = "members")
 public class Member {
     @Id
-    @NotBlank(message = "ID-ul este obligatoriu.")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Adăugat: Generarea automată a ID-ului
     private Long id;
 
     @NotBlank(message = "Numele este obligatoriu.")
@@ -25,10 +26,11 @@ public class Member {
     // Relatia Many-to-One cu Library (coloana FK va fi 'library_id')
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "library_id", nullable = false)
+    @NotNull(message = "Biblioteca este obligatorie.") // Adăugat: Validare pe entitate
     private Library library;
 
-    @Transient // Marcam campul vechi pentru a-l folosi in formularul Thymeleaf
-    @NotBlank(message = "ID-ul bibliotecii este obligatoriu pentru validarea business.")
+    @Transient // Marcam campul auxiliar
+    @NotNull(message = "ID-ul bibliotecii este obligatoriu pentru validarea business.") // Corectat din @NotBlank
     private Long libraryId;
 
     // Relatia One-to-Many cu Reservation
@@ -40,8 +42,6 @@ public class Member {
     private List<Loan> loans = new ArrayList<>();
 
     public Member() {}
-
-    // Constructorul este simplificat pentru a folosi JPA
 
     public Long getId() {
         return id;

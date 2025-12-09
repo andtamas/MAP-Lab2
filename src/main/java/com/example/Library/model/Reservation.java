@@ -3,26 +3,31 @@ package com.example.Library.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotNull; // Adăugat
 
 @Entity
 @Table(name = "reservations")
 public class Reservation {
     @Id
-    @NotBlank(message = "ID-ul rezervării este obligatoriu.")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Adăugat: Generarea automată a ID-ului
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
+    @NotNull(message = "Membrul este obligatoriu.") // Adăugat
     private Member member;
 
-    @NotBlank(message = "ID-ul membrului este obligatoriu.")
+    @Transient
+    @NotNull(message = "ID-ul membrului este obligatoriu.") // Corectat din @NotBlank
     private Long memberId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "readable_item_id", nullable = false)
+    @NotNull(message = "Exemplarul este obligatoriu.") // Adăugat
     private ReadableItem readableItem;
 
-    @NotBlank(message = "ID-ul exemplarului este obligatoriu.")
+    @Transient
+    @NotNull(message = "ID-ul exemplarului este obligatoriu.") // Corectat din @NotBlank
     private Long readableItemId;
 
     @NotBlank(message = "Data este obligatorie.")
@@ -30,6 +35,7 @@ public class Reservation {
     private String date;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Statusul este obligatoriu.") // Adăugat
     private ReservationStatus status; // Active / Cancelled / Completed
 
     public Reservation() {}
@@ -38,7 +44,8 @@ public class Reservation {
         return id;
     }
 
-    public void setId(@NotBlank Long id) {
+    // Curățat de adnotarea incorectă (@NotBlank) de pe parametru
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,11 +56,12 @@ public class Reservation {
     public void setMember(Member member) {
         this.member = member;
         if (member != null) {
-            this.memberId = Long.valueOf(member.getId());
+            this.memberId = member.getId();
         }
     }
 
-    public @NotBlank(message = "ID-ul membrului este obligatoriu.") @NotBlank(message = "ID-ul membrului este obligatoriu.") Long getMemberId() {
+    // Curățat de adnotările incorecte (@NotBlank) de pe metoda getter
+    public Long getMemberId() {
         if (member != null) {
             return member.getId();
         }

@@ -26,7 +26,7 @@ public class MagazineDetailsRestController {
 
     // Obține o revistă după ID
     @GetMapping("/{id}")
-    public ResponseEntity<MagazineDetails> getMagazineById(@PathVariable String id) {
+    public ResponseEntity<MagazineDetails> getMagazineById(@PathVariable Long id) {
         return magazineDetailsRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -40,7 +40,7 @@ public class MagazineDetailsRestController {
 
     // Actualizează o revistă
     @PutMapping("/{id}")
-    public ResponseEntity<MagazineDetails> updateMagazine(@PathVariable String id,
+    public ResponseEntity<MagazineDetails> updateMagazine(@PathVariable Long id,
                                                           @Valid @RequestBody MagazineDetails magazineDetailsDetails) {
         return magazineDetailsRepository.findById(id).map(magazine -> {
 
@@ -58,7 +58,7 @@ public class MagazineDetailsRestController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMagazine(@PathVariable String id) {
+    public ResponseEntity<Void> deleteMagazine(@PathVariable Long id) {
         return magazineDetailsRepository.findById(id).map(magazine -> {
             magazineDetailsRepository.delete(magazine);
             return ResponseEntity.noContent().<Void>build();

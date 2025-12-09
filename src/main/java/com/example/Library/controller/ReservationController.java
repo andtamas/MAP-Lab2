@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/reservations")
 public class ReservationController {
@@ -35,28 +37,28 @@ public class ReservationController {
     }
 
     @GetMapping("/{id}/detail")
-    public String viewReservation(@PathVariable String id, Model model) {
+    public String viewReservation(@PathVariable Long id, Model model) {
         model.addAttribute("reservation", reservationService.getById(id));
         return "reservation/detail";
     }
 
     @GetMapping("/{id}/edit")
-    public String showEditForm(@PathVariable String id, Model model) {
-        Reservation reservation = reservationService.getById(id);
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Optional<Reservation> reservation = reservationService.getById(id);
         model.addAttribute("reservation", reservation);
         return "reservation/form";
     }
 
     // Process update
     @PostMapping("/{id}/edit")
-    public String updateReservation(@PathVariable String id, @ModelAttribute Reservation reservation) {
+    public String updateReservation(@PathVariable Long id, @ModelAttribute Reservation reservation) {
         reservation.setId(id);
         reservationService.update(reservation);
         return "redirect:/reservations";
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteReservation(@PathVariable String id) {
+    public String deleteReservation(@PathVariable Long id) {
         reservationService.delete(id);
         return "redirect:/reservations";
     }

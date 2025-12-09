@@ -11,13 +11,14 @@ import java.util.List;
 public class Library {
 
     @Id
-    @NotBlank(message = "ID-ul bibliotecii este obligatoriu.")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Adăugat: Generarea automată a ID-ului
     private Long id;
 
     @NotBlank(message = "Numele este obligatoriu.")
     @Size(min = 3, message = "Numele trebuie să aibă minim 3 caractere.")
     private String name;
 
+    // Relatia One-to-Many cu Member
     @OneToMany(mappedBy = "library", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Member> members = new ArrayList<>();
 

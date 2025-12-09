@@ -2,23 +2,26 @@ package com.example.Library.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull; // Adăugat
 
 @Entity
 @Table(name = "readable_items")
 public class ReadableItem {
 
     @Id
-    @NotBlank(message = "ID-ul exemplarului este obligatoriu.")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Adăugat: Generarea automată a ID-ului
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publication_id")
+    @JoinColumn(name = "publication_id", nullable = false)
+    @NotNull(message = "Publicația este obligatorie.")
     private Publication publication;
 
     @NotBlank(message = "Codul de bare este obligatoriu.")
     private String barcode;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Statusul este obligatoriu.") // Adăugat
     private ReservationStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)

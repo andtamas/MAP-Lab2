@@ -1,7 +1,7 @@
 package com.example.Library.service;
 
 import com.example.Library.model.BookDetails;
-import com.example.Library.repository.old.BookDetailsRepository;
+import com.example.Library.repository.BookDetailsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class BookDetailsService {
     }
 
     // Actualizează un BookDetails existent
-    public void update(String id, BookDetails updatedData) {
+    public void update(Long id, BookDetails updatedData) {
         Optional<BookDetails> optionalBook = bookDetailsRepository.findById(id);
 
         if (optionalBook.isPresent()) {
@@ -47,12 +47,12 @@ public class BookDetailsService {
         return bookDetailsRepository.findAll();
     }
 
-    public BookDetails getById(String id) {
+    public BookDetails getById(Long id) {
         return bookDetailsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("BookDetails cu id-ul " + id + " nu a fost găsit."));
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         bookDetailsRepository.deleteById(id);
     }
 }
