@@ -1,7 +1,7 @@
 package com.example.Library.service;
 
 import com.example.Library.model.MagazineDetails;
-import com.example.Library.repository.old.MagazineDetailsRepository;
+import com.example.Library.repository.MagazineDetailsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class MagazineDetailsService {
     }
 
     // UPDATE (CORECT)
-    public void update(String id, MagazineDetails newData) {
+    public void update(Long id, MagazineDetails newData) {
         Optional<MagazineDetails> optional = magazineDetailsRepository.findById(id);
 
         if (optional.isPresent()) {
@@ -37,17 +37,17 @@ public class MagazineDetailsService {
     }
 
     // READ ALL
-    public List<MagazineDetails> getAll() {
+    public List<MagazineDetails> findAll() {
         return magazineDetailsRepository.findAll();
     }
 
     // READ BY ID
-    public MagazineDetails getById(String id) {
+    public MagazineDetails findById(Long id) {
         return magazineDetailsRepository.findById(id).orElse(null);
     }
 
     // DELETE
-    public void delete(String id) {
+    public void delete(Long id) {
         magazineDetailsRepository.deleteById(id);
     }
 }

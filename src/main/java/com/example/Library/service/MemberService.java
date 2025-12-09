@@ -1,9 +1,11 @@
 package com.example.Library.service;
 import com.example.Library.model.Member;
-import com.example.Library.repository.old.MemberRepository;
+import com.example.Library.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class MemberService {
     private MemberRepository memberRepository;
@@ -17,18 +19,18 @@ public class MemberService {
     }
 
     public void update(Member member) {
-        memberRepository.update(member);
+        memberRepository.save(member);
     }
 
-    public List<Member> getAll() {
+    public List<Member> findAll() {
         return memberRepository.findAll();
     }
 
-    public Member getById(String id) {
+    public Optional<Member> findById(Long id) {
         return memberRepository.findById(id);
     }
 
-    public void delete(String id) {
-        memberRepository.delete(id);
+    public void delete(Long id) {
+        memberRepository.deleteById(id);
     }
 }

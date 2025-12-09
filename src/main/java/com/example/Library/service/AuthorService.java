@@ -14,7 +14,7 @@ public class AuthorService {
         this.authorRepository = authorRepository;
     }
 
-    public void add(Author author) {
+    public void save(Author author) {
         authorRepository.save(author);
     }
 
@@ -22,16 +22,16 @@ public class AuthorService {
         authorRepository.save(author);
     }
 
-    public List<Author> getAll() {
+    public List<Author> findAll() {
         return authorRepository.findAll();
     }
 
-    public Optional<Author> getById(Long id) {
+    public Optional<Author> findById(Long id) {
         return authorRepository.findById(id);
     }
 
     public void delete(Long id) {
-        authorRepository.delete(id);
+        authorRepository.deleteById(id);
     }
 
 }

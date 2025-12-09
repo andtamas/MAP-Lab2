@@ -1,7 +1,7 @@
 package com.example.Library.service;
 
 import com.example.Library.model.BookAuthor;
-import com.example.Library.repository.old.BookAuthorRepository;
+import com.example.Library.repository.BookAuthorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class BookAuthorService {
         this.bookAuthorRepository = bookAuthorRepository;
     }
 
-    public void add(BookAuthor bookAuthor) {
+    public void save(BookAuthor bookAuthor) {
         bookAuthorRepository.save(bookAuthor);
     }
 
@@ -25,15 +25,15 @@ public class BookAuthorService {
         existingOpt.ifPresent(existing -> {
             existing.setBook(updatedBookAuthor.getBook());
             existing.setAuthor(updatedBookAuthor.getAuthor());
-            bookAuthorRepository.save(existing); // salvăm modificările
+            bookAuthorRepository.save(existing);
         });
     }
 
-    public List<BookAuthor> getAll() {
+    public List<BookAuthor> findAll() {
         return bookAuthorRepository.findAll();
     }
 
-    public BookAuthor getById(Long id) {
+    public BookAuthor findById(Long id) {
         return bookAuthorRepository.findById(id).orElse(null);
     }
 
