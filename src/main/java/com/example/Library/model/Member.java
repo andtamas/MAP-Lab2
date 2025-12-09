@@ -43,15 +43,15 @@ public class Member {
 
     // Constructorul este simplificat pentru a folosi JPA
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
+    public Long getName() {
         return name;
     }
 
@@ -59,7 +59,7 @@ public class Member {
         this.name = name;
     }
 
-    public String getEmail() {
+    public Long getEmail() {
         return email;
     }
 
@@ -76,12 +76,12 @@ public class Member {
     }
 
     // Metoda ajutătoare pentru Thymeleaf/Form
-    public String getLibraryId() {
+    public Long getLibraryId() {
         return library != null ? library.getId() : libraryId;
     }
 
     // Metoda ajutătoare pentru Thymeleaf/Form
-    public void setLibraryId(String libraryId) {
+    public void setLibraryId(Long libraryId) {
         this.libraryId = libraryId;
     }
 

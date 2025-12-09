@@ -9,7 +9,7 @@ public class ReadableItem {
 
     @Id
     @NotBlank(message = "ID-ul exemplarului este obligatoriu.")
-    private String id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publication_id")
@@ -27,15 +27,15 @@ public class ReadableItem {
 
     public ReadableItem() {}
 
-    public ReadableItem(String id, Publication publication, String barcode, ReservationStatus status) {
+    public ReadableItem(Long id, Publication publication, String barcode, ReservationStatus status) {
         this.id = id;
         this.publication = publication;
         this.barcode = barcode;
         this.status = status;
     }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public Publication getPublication() { return publication; }
     public void setPublication(Publication publication) { this.publication = publication; }

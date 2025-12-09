@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Pattern;
 public class Reservation {
     @Id
     @NotBlank(message = "ID-ul rezervării este obligatoriu.")
-    private String id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
@@ -17,7 +17,7 @@ public class Reservation {
 
     @Transient
     @NotBlank(message = "ID-ul membrului este obligatoriu.")
-    private String memberId;
+    private Long memberId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "readable_item_id", nullable = false)
@@ -25,7 +25,7 @@ public class Reservation {
 
     @Transient
     @NotBlank(message = "ID-ul exemplarului este obligatoriu.")
-    private String readableItemId;
+    private Long readableItemId;
 
     @NotBlank(message = "Data este obligatorie.")
     @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Format data invalid (YYYY-MM-DD).")
@@ -36,11 +36,11 @@ public class Reservation {
 
     public Reservation() {}
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NotBlank Long id) {
         this.id = id;
     }
 
@@ -51,18 +51,18 @@ public class Reservation {
     public void setMember(Member member) {
         this.member = member;
         if (member != null) {
-            this.memberId = member.getId();
+            this.memberId = Long.valueOf(member.getId());
         }
     }
 
-    public String getMemberId() {
+    public @NotBlank(message = "ID-ul membrului este obligatoriu.") @NotBlank(message = "ID-ul membrului este obligatoriu.") Long getMemberId() {
         if (member != null) {
             return member.getId();
         }
         return memberId;
     }
 
-    public void setMemberId(String memberId) {
+    public void setMemberId(Long memberId) {
         this.memberId = memberId;
     }
 
@@ -77,14 +77,14 @@ public class Reservation {
         }
     }
 
-    public String getReadableItemId() {
+    public Long getReadableItemId() {
         if (readableItem != null) {
             return readableItem.getId();
         }
         return readableItemId;
     }
 
-    public void setReadableItemId(String readableItemId) {
+    public void setReadableItemId(Long readableItemId) {
         this.readableItemId = readableItemId;
     }
 
