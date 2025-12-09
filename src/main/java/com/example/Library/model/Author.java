@@ -1,7 +1,7 @@
 package com.example.Library.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -9,7 +9,7 @@ import java.util.List;
 public class Author {
 
     @Id
-    @NotBlank(message = "ID-ul autorului este obligatoriu.")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Adăugat: Generarea automată a ID-ului
     private Long id;
 
     @NotBlank(message = "Numele este obligatoriu.")
@@ -22,6 +22,7 @@ public class Author {
 
     public Author() {}
 
+    // Constructorul cu Long id (deși nu este recomandat a fi folosit cu @GeneratedValue)
     public Author(Long id, String name, String nationality) {
         this.id = id;
         this.name = name;

@@ -8,6 +8,7 @@ import java.util.List;
 public abstract class Publication {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Adăugat: Generarea automată a ID-ului
     private Long id;
 
     private String title;

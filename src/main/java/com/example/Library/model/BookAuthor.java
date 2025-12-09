@@ -1,6 +1,7 @@
 package com.example.Library.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull; // Adăugat
 
 @Entity
 @Table(name = "book_author")
@@ -12,10 +13,12 @@ public class BookAuthor {
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
+    @NotNull(message = "Cartea este obligatorie.") // Adăugat
     private BookDetails book;
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
+    @NotNull(message = "Autorul este obligatoriu.") // Adăugat
     private Author author;
 
     public BookAuthor() {}
@@ -28,6 +31,8 @@ public class BookAuthor {
     public Long getId() {
         return id;
     }
+
+    // setId omis pentru ID-uri generate automat
 
     public BookDetails getBook() {
         return book;

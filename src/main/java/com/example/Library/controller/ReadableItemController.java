@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/items")
 public class ReadableItemController {
@@ -35,27 +37,27 @@ public class ReadableItemController {
     }
 
     @GetMapping("/{id}/edit")
-    public String showEditForm(@PathVariable String id, Model model) {
-        ReadableItem item = readableItemService.getById(id);
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Optional<ReadableItem> item = readableItemService.getById(id);
         model.addAttribute("item", item);
         return "item/form";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateItem(@PathVariable String id, @ModelAttribute ReadableItem item) {
+    public String updateItem(@PathVariable Long id, @ModelAttribute ReadableItem item) {
         item.setId(id);
         readableItemService.update(item);
         return "redirect:/items";
     }
 
     @GetMapping("/{id}/detail")
-    public String viewItemDetails(@PathVariable String id, Model model) {
-        ReadableItem item = readableItemService.getById(id);
+    public String viewItemDetails(@PathVariable Long id, Model model) {
+        Optional<ReadableItem> item = readableItemService.getById(id);
         model.addAttribute("item", item);
         return "item/detail";
     }
     @PostMapping("/{id}/delete")
-    public String deleteItem(@PathVariable String id) {
+    public String deleteItem(@PathVariable Long id) {
         readableItemService.delete(id);
         return "redirect:/items";
     }

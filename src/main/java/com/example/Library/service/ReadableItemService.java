@@ -1,9 +1,11 @@
 package com.example.Library.service;
 import com.example.Library.model.ReadableItem;
-import com.example.Library.repository.old.ReadableItemRepository;
+import com.example.Library.repository.ReadableItemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ReadableItemService {
     private ReadableItemRepository readableItemRepository;
@@ -17,18 +19,18 @@ public class ReadableItemService {
     }
 
     public void update(ReadableItem readableItem) {
-        this.readableItemRepository.update(readableItem);
+        this.readableItemRepository.save(readableItem);
     }
 
     public List<ReadableItem> getAll() {
         return readableItemRepository.findAll();
     }
 
-    public ReadableItem getById(String id) {
+    public Optional<ReadableItem> getById(Long id) {
         return readableItemRepository.findById(id);
     }
 
-    public void delete(String id) {
-        readableItemRepository.delete(id);
+    public void delete(Long id) {
+        readableItemRepository.deleteById(id);
     }
 }

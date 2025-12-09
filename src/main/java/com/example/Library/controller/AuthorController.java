@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/authors")
 public class AuthorController {
@@ -36,27 +38,27 @@ public class AuthorController {
     }
 
     @GetMapping("/{id}/detail")
-    public String viewAuthor(@PathVariable String id, Model model) {
-        Author author = authorService.getById(id);
+    public String viewAuthor(@PathVariable Long id, Model model) {
+        Optional<Author> author = authorService.getById(id);
         model.addAttribute("author", author);
         return "author/detail";
     }
 
     @GetMapping("/{id}/edit")
-    public String showEditForm(@PathVariable String id, Model model) {
+    public String showEditForm(@PathVariable Long id, Model model) {
         model.addAttribute("author", authorService.getById(id));
         return "author/form";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateBookAuthor(@PathVariable String id, @ModelAttribute Author author) {
+    public String updateBookAuthor(@PathVariable Long id, @ModelAttribute Author author) {
         author.setId(id);
         authorService.update(author);
         return "redirect:/authors";
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteAuthor(@PathVariable String id) {
+    public String deleteAuthor(@PathVariable Long id) {
         authorService.delete(id);
         return "redirect:/authors";
     }
