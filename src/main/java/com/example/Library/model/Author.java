@@ -17,11 +17,10 @@ public class Author {
 
     private String nationality;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    private List<BookAuthor> books;
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookAuthor> bookAuthors;
 
-    public Author() {
-    }
+    public Author() {}
 
     public Author(String id, String name, String nationality) {
         this.id = id;
@@ -29,37 +28,17 @@ public class Author {
         this.nationality = nationality;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
+    public String getNationality() { return nationality; }
+    public void setNationality(String nationality) { this.nationality = nationality; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public List<BookAuthor> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<BookAuthor> books) {
-        this.books = books;
-    }
+    public List<BookAuthor> getBookAuthors() { return bookAuthors; }
+    public void setBookAuthors(List<BookAuthor> bookAuthors) { this.bookAuthors = bookAuthors; }
 
     @Override
     public String toString() {

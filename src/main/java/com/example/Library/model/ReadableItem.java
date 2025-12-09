@@ -11,15 +11,15 @@ public class ReadableItem {
     @NotBlank(message = "ID-ul exemplarului este obligatoriu.")
     private String id;
 
-    @Transient
-    @NotBlank(message = "ID-ul publicației este obligatoriu.")
-    private String publicationId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "publication_id")
+    private Publication publication;
 
     @NotBlank(message = "Codul de bare este obligatoriu.")
     private String barcode;
 
     @Enumerated(EnumType.STRING)
-    private ReservationStatus status; // Available / Borrowed / Reserved
+    private ReservationStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "library_id")
@@ -27,60 +27,25 @@ public class ReadableItem {
 
     public ReadableItem() {}
 
-    public ReadableItem(String id, String publicationId, String barcode, ReservationStatus status) {
+    public ReadableItem(String id, Publication publication, String barcode, ReservationStatus status) {
         this.id = id;
-        this.publicationId = publicationId;
+        this.publication = publication;
         this.barcode = barcode;
         this.status = status;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public Publication getPublication() { return publication; }
+    public void setPublication(Publication publication) { this.publication = publication; }
 
-    public String getPublicationId() {
-        return publicationId;
-    }
+    public String getBarcode() { return barcode; }
+    public void setBarcode(String barcode) { this.barcode = barcode; }
 
-    public void setPublicationId(String publicationId) {
-        this.publicationId = publicationId;
-    }
+    public ReservationStatus getStatus() { return status; }
+    public void setStatus(ReservationStatus status) { this.status = status; }
 
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
-
-    public ReservationStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ReservationStatus status) {
-        this.status = status;
-    }
-
-    public Library getLibrary() {
-        return library;
-    }
-
-    public void setLibrary(Library library) {
-        this.library = library;
-    }
-
-    @Override
-    public String toString() {
-        return "ReadableItem{" +
-                "id='" + id + '\'' +
-                ", publicationId='" + publicationId + '\'' +
-                ", barcode='" + barcode + '\'' +
-                ", status=" + status +
-                '}';
-    }
+    public Library getLibrary() { return library; }
+    public void setLibrary(Library library) { this.library = library; }
 }

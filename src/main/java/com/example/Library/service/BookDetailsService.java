@@ -4,6 +4,9 @@ import com.example.Library.model.BookDetails;
 import com.example.Library.repository.BookDetailsRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class BookDetailsService {
 
@@ -13,26 +16,43 @@ public class BookDetailsService {
         this.bookDetailsRepository = bookDetailsRepository;
     }
 
-    public BookDetails updateBook(Long id, BookDetails bookDetailsDetails) {
-        BookDetails book = bookDetailsRepository.findById(String.valueOf(id))
-                .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
-
-        book.setTitle(bookDetailsDetails.getTitle());
-        book.setAuthor(bookDetailsDetails.getAuthor());
-        book.setPublisher(bookDetailsDetails.getPublisher());
-        book.setYear(bookDetailsDetails.getYear());
-
-        return bookDetailsRepository.save(book); // aici se face update
+    // Adaugă un nou BookDetails
+    public void add(BookDetails bookDetails) {
+        bookDetailsRepository.save(bookDetails);
     }
 
-    public BookDetails getBookById(Long id) {
-        return bookDetailsRepository.findById(String.valueOf(id))
-                .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
+    // Actualizează un BookDetails existent
+    public void update(String id, BookDetails updatedData) {
+        Optional<BookDetails> optionalBook = bookDetailsRepository.findById(id);
+
+        if (optionalBook.isPresent()) {
+            BookDetails existing = optionalBook.get();
+
+            // actualizează titlul
+            existing.setTitle(updatedData.getTitle());
+
+            // actualizează lista de copii
+            existing.setCopies(updatedData.getCopies());
+
+            // actualizează lista de BookAuthor
+            existing.setBookAuthors(updatedData.getBookAuthors());
+
+            bookDetailsRepository.save(existing);
+        } else {
+            throw new RuntimeException("BookDetails cu id-ul " + id + " nu a fost găsit.");
+        }
     }
 
-    public void deleteBook(Long id) {
-        BookDetails book = bookDetailsRepository.findById(String.valueOf(id))
-                .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
-        bookDetailsRepository.delete(book);
+    public List<BookDetails> getAll() {
+        return bookDetailsRepository.findAll();
+    }
+
+    public BookDetails getById(String id) {
+        return bookDetailsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("BookDetails cu id-ul " + id + " nu a fost găsit."));
+    }
+
+    public void delete(String id) {
+        bookDetailsRepository.deleteById(id);
     }
 }

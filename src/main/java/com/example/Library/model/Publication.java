@@ -3,7 +3,8 @@ package com.example.Library.model;
 import jakarta.persistence.*;
 import java.util.List;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED) // Poți folosi SINGLE_TABLE dacă vrei o singură tabelă
 public abstract class Publication {
 
     @Id

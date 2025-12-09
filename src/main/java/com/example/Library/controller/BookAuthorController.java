@@ -34,29 +34,28 @@ public class BookAuthorController {
         return "redirect:/bookauthors";
     }
 
-    @GetMapping("/{id}/detail")
-    public String viewBookAuthor(@PathVariable String id, Model model) {
-        BookAuthor bookAuthor = bookAuthorService.getById(id);
-        model.addAttribute("bookAuthor", bookAuthor);
-        return "bookauthor/detail";
-    }
-
     @GetMapping("/{id}/edit")
-    public String showEditForm(@PathVariable String id, Model model) {
+    public String showEditForm(@PathVariable Long id, Model model) {
         model.addAttribute("bookAuthor", bookAuthorService.getById(id));
         return "bookauthor/form";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateBookAuthor(@PathVariable String id, @ModelAttribute BookAuthor bookAuthor) {
-        bookAuthor.setId(id);
-        bookAuthorService.update(bookAuthor);
+    public String updateBookAuthor(@PathVariable Long id, @ModelAttribute BookAuthor bookAuthor) {
+        bookAuthorService.update(id, bookAuthor);
         return "redirect:/bookauthors";
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteBookAuthor(@PathVariable String id) {
+    public String deleteBookAuthor(@PathVariable Long id) {
         bookAuthorService.delete(id);
         return "redirect:/bookauthors";
+    }
+
+    @GetMapping("/{id}/detail")
+    public String viewBookAuthor(@PathVariable Long id, Model model) {
+        BookAuthor bookAuthor = bookAuthorService.getById(id);
+        model.addAttribute("bookAuthor", bookAuthor);
+        return "bookauthor/detail";
     }
 }

@@ -1,39 +1,47 @@
 package com.example.Library.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "book_author")
 public class BookAuthor {
-    private String id;
-    private String bookId;
-    private String authorId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private BookDetails book;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
+    private Author author;
 
     public BookAuthor() {}
 
-    public BookAuthor(String id, String bookId, String authorId) {
-        this.id = id;
-        this.bookId = bookId;
-        this.authorId = authorId;
+    public BookAuthor(BookDetails book, Author author) {
+        this.book = book;
+        this.author = author;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public BookDetails getBook() {
+        return book;
     }
 
-    public String getBookId() {
-        return bookId;
+    public void setBook(BookDetails book) {
+        this.book = book;
     }
 
-    public void setBookId(String bookId) {
-        this.bookId = bookId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public String getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 }
