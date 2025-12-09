@@ -16,7 +16,6 @@ public class Loan {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @Transient
     @NotBlank(message = "ID-ul membrului este obligatoriu.")
     private Long memberId;
 
@@ -24,10 +23,8 @@ public class Loan {
     @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Format data invalid (YYYY-MM-DD).")
     private String date;
 
-    @Transient
     private List<Reservation> reservations;
 
-    @Transient
     private List<ReadableItem> items;
 
     public Loan() {}

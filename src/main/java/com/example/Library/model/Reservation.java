@@ -15,7 +15,6 @@ public class Reservation {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @Transient
     @NotBlank(message = "ID-ul membrului este obligatoriu.")
     private Long memberId;
 
@@ -23,7 +22,6 @@ public class Reservation {
     @JoinColumn(name = "readable_item_id", nullable = false)
     private ReadableItem readableItem;
 
-    @Transient
     @NotBlank(message = "ID-ul exemplarului este obligatoriu.")
     private Long readableItemId;
 
