@@ -51,7 +51,7 @@ public class Member {
         this.id = id;
     }
 
-    public Long getName() {
+    public String getName() {
         return name;
     }
 
@@ -59,7 +59,7 @@ public class Member {
         this.name = name;
     }
 
-    public Long getEmail() {
+    public String getEmail() {
         return email;
     }
 
