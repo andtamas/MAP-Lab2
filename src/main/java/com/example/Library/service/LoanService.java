@@ -1,7 +1,7 @@
 package com.example.Library.service;
 
 import com.example.Library.model.Loan;
-import com.example.Library.repository.LoanRepository;
+import com.example.Library.repository.old.LoanRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

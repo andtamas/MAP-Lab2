@@ -1,11 +1,11 @@
 package com.example.Library.repository;
 
 import com.example.Library.model.Author;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AuthorRepository extends InFileRepository<Author> {
-    public AuthorRepository() {
-        super("src/main/resources/data/authors.json", Author.class);
-    }
+
+public interface AuthorRepository extends JpaRepository<Author, Long> {
+
 }

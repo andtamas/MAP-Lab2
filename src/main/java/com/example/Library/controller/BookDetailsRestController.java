@@ -1,7 +1,7 @@
 package com.example.Library.controller;
 
 import com.example.Library.model.BookDetails;
-import com.example.Library.repository.BookDetailsRepository;
+import com.example.Library.repository.old.BookDetailsRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

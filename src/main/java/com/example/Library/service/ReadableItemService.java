@@ -1,6 +1,6 @@
 package com.example.Library.service;
 import com.example.Library.model.ReadableItem;
-import com.example.Library.repository.ReadableItemRepository;
+import com.example.Library.repository.old.ReadableItemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

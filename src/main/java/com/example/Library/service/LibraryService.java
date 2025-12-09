@@ -1,6 +1,6 @@
 package com.example.Library.service;
 import com.example.Library.model.Library;
-import com.example.Library.repository.LibraryRepository;
+import com.example.Library.repository.old.LibraryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

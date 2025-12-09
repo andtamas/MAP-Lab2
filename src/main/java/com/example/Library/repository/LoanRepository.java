@@ -1,11 +1,10 @@
 package com.example.Library.repository;
 
 import com.example.Library.model.Loan;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class LoanRepository extends InFileRepository<Loan> {
-    public LoanRepository() {
-        super("src/main/resources/data/loans.json", Loan.class);
-    }
+
+public interface LoanRepository extends JpaRepository<Loan,Long> {
 }
