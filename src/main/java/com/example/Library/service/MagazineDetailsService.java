@@ -1,35 +1,53 @@
 package com.example.Library.service;
+
 import com.example.Library.model.MagazineDetails;
 import com.example.Library.repository.MagazineDetailsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class MagazineDetailsService {
-    private MagazineDetailsRepository magazineDetailsRepository;
+
+    private final MagazineDetailsRepository magazineDetailsRepository;
 
     public MagazineDetailsService(MagazineDetailsRepository magazineDetailsRepository) {
         this.magazineDetailsRepository = magazineDetailsRepository;
     }
 
+    // CREATE
     public void add(MagazineDetails magazineDetails) {
         magazineDetailsRepository.save(magazineDetails);
     }
 
-    public void update(MagazineDetails magazineDetails) {
-        magazineDetailsRepository.update(magazineDetails);
+    // UPDATE (CORECT)
+    public void update(String id, MagazineDetails newData) {
+        Optional<MagazineDetails> optional = magazineDetailsRepository.findById(id);
+
+        if (optional.isPresent()) {
+            MagazineDetails magazine = optional.get();
+
+            magazine.setTitle(newData.getTitle());
+            magazine.setPublisher(newData.getPublisher());
+            magazine.setYear(newData.getYear());
+
+            magazineDetailsRepository.save(magazine);
+        }
     }
 
+    // READ ALL
     public List<MagazineDetails> getAll() {
         return magazineDetailsRepository.findAll();
     }
 
+    // READ BY ID
     public MagazineDetails getById(String id) {
-        return magazineDetailsRepository.findById(id);
+        return magazineDetailsRepository.findById(id).orElse(null);
     }
 
+    // DELETE
     public void delete(String id) {
-        magazineDetailsRepository.delete(id);
+        magazineDetailsRepository.deleteById(id);
     }
-
 }
