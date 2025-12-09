@@ -12,13 +12,12 @@ public class Library {
 
     @Id
     @NotBlank(message = "ID-ul bibliotecii este obligatoriu.")
-    private String id;
+    private Long id;
 
     @NotBlank(message = "Numele este obligatoriu.")
     @Size(min = 3, message = "Numele trebuie să aibă minim 3 caractere.")
     private String name;
 
-    // Relatia One-to-Many cu Member
     @OneToMany(mappedBy = "library", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Member> members = new ArrayList<>();
 
@@ -28,16 +27,16 @@ public class Library {
 
     public Library() {}
 
-    public Library(String id, String name) {
+    public Library(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

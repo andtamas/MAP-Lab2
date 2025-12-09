@@ -10,7 +10,7 @@ import java.util.List;
 public class Loan {
     @Id
     @NotBlank(message = "ID-ul împrumutului este obligatoriu.")
-    private String id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
@@ -18,7 +18,7 @@ public class Loan {
 
     @Transient
     @NotBlank(message = "ID-ul membrului este obligatoriu.")
-    private String memberId;
+    private Long memberId;
 
     @NotBlank(message = "Data este obligatorie.")
     @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Format data invalid (YYYY-MM-DD).")
@@ -32,11 +32,11 @@ public class Loan {
 
     public Loan() {}
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,14 +51,14 @@ public class Loan {
         }
     }
 
-    public String getMemberId() {
+    public Long getMemberId() {
         if (member != null) {
             return member.getId();
         }
         return memberId;
     }
 
-    public void setMemberId(String memberId) {
+    public void setMemberId(Long memberId) {
         this.memberId = memberId;
     }
 

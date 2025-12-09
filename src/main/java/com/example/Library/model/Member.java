@@ -12,7 +12,7 @@ import java.util.List;
 public class Member {
     @Id
     @NotBlank(message = "ID-ul este obligatoriu.")
-    private String id;
+    private Long id;
 
     @NotBlank(message = "Numele este obligatoriu.")
     @Size(min = 2, max = 100, message = "Numele trebuie sa aiba intre 2 si 100 de caractere.")
@@ -29,7 +29,7 @@ public class Member {
 
     @Transient // Marcam campul vechi pentru a-l folosi in formularul Thymeleaf
     @NotBlank(message = "ID-ul bibliotecii este obligatoriu pentru validarea business.")
-    private String libraryId;
+    private Long libraryId;
 
     // Relatia One-to-Many cu Reservation
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
