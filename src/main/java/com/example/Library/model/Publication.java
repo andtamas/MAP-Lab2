@@ -8,7 +8,7 @@ import java.util.List;
 public abstract class Publication {
 
     @Id
-    private String id;
+    private Long id;
 
     private String title;
 
@@ -17,14 +17,14 @@ public abstract class Publication {
 
     public Publication() {}
 
-    public Publication(String id, String title, List<ReadableItem> copies) {
+    public Publication(Long id, String title, List<ReadableItem> copies) {
         this.id = id;
         this.title = title;
         this.copies = copies;
     }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }

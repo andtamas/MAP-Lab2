@@ -12,7 +12,7 @@ public class MagazineDetails extends Publication {
 
     public MagazineDetails() {}
 
-    public MagazineDetails(String id, String title, List<ReadableItem> copies, String editor, int year) {
+    public MagazineDetails(Long id, String title, List<ReadableItem> copies, String editor, int year) {
         super(id, title, copies);
         this.editor = editor;
         this.year = year;

@@ -15,7 +15,7 @@ public class BookDetails extends Publication {
 
     public BookDetails() {}
 
-    public BookDetails(String id, String title, List<ReadableItem> copies, List<BookAuthor> bookAuthors, String publisher, int year) {
+    public BookDetails(Long id, String title, List<ReadableItem> copies, List<BookAuthor> bookAuthors, String publisher, int year) {
         super(id, title, copies);
         this.bookAuthors = bookAuthors;
         this.publisher = publisher;

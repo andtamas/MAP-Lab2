@@ -10,7 +10,7 @@ public class Author {
 
     @Id
     @NotBlank(message = "ID-ul autorului este obligatoriu.")
-    private String id;
+    private Long id;
 
     @NotBlank(message = "Numele este obligatoriu.")
     private String name;
