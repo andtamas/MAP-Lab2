@@ -1,9 +1,10 @@
 package com.example.Library.service;
 import com.example.Library.model.Author;
-import com.example.Library.repository.old.AuthorRepository;
+import com.example.Library.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -18,18 +19,18 @@ public class AuthorService {
     }
 
     public void update(Author author) {
-        authorRepository.update(author);
+        authorRepository.save(author);
     }
 
     public List<Author> getAll() {
         return authorRepository.findAll();
     }
 
-    public Author getById(String id) {
+    public Optional<Author> getById(Long id) {
         return authorRepository.findById(id);
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         authorRepository.delete(id);
     }
 
