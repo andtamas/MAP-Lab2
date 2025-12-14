@@ -1,33 +1,48 @@
 package com.example.Library.service;
+
+import com.example.Library.model.Library;
 import com.example.Library.model.Member;
+import com.example.Library.repository.LibraryRepository;
 import com.example.Library.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MemberService {
-    private MemberRepository memberRepository;
 
-    public MemberService (MemberRepository memberRepository) {
+    private final MemberRepository memberRepository;
+    private final LibraryRepository libraryRepository;
+
+    public MemberService(MemberRepository memberRepository,
+                         LibraryRepository libraryRepository) {
         this.memberRepository = memberRepository;
+        this.libraryRepository = libraryRepository;
     }
 
-    public void add(Member member) {
+    public void create(String name, String email, Long libraryId) {
+        Library library = libraryRepository.findById(libraryId)
+                .orElseThrow();
+
+        Member member = new Member(name, email, library);
         memberRepository.save(member);
     }
 
-    public void update(Member member) {
-        memberRepository.save(member);
+    public void update(Long id, String name, String email) {
+        Member member = memberRepository.findById(id)
+                .orElseThrow();
+
+        member.setName(name);
+        member.setEmail(email);
+        // version e gestionat automat
+    }
+
+    public Member getById(Long id) {
+        return memberRepository.findById(id).orElseThrow();
     }
 
     public List<Member> getAll() {
         return memberRepository.findAll();
-    }
-
-    public Optional<Member> getById(Long id) {
-        return memberRepository.findById(id);
     }
 
     public void delete(Long id) {

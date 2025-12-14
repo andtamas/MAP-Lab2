@@ -16,43 +16,52 @@ public class LibraryController {
         this.libraryService = libraryService;
     }
 
+    // LIST
     @GetMapping
     public String listLibraries(Model model) {
         model.addAttribute("libraries", libraryService.getAll());
         return "library/index";
     }
 
+    // FORM CREATE
     @GetMapping("/new")
     public String showCreateForm(Model model) {
-        model.addAttribute("library", new Library());
+        model.addAttribute("library", new Library(""));
         return "library/form";
     }
 
+    // CREATE – ID generat automat
     @PostMapping
-    public String createLibrary(@ModelAttribute Library library) {
-        libraryService.add(library);
+    public String createLibrary(@RequestParam String name) {
+        libraryService.create(name);
         return "redirect:/libraries";
     }
 
+    // DETAIL
     @GetMapping("/{id}/detail")
     public String viewLibrary(@PathVariable Long id, Model model) {
         model.addAttribute("library", libraryService.getById(id));
         return "library/detail";
     }
 
+    // FORM EDIT
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
         model.addAttribute("library", libraryService.getById(id));
         return "library/form";
     }
 
+    // UPDATE – FĂRĂ setId
     @PostMapping("/{id}/update")
-    public String  updateLibrary(@PathVariable Long id, @ModelAttribute Library library) {
-        library.setId(id);
-        libraryService.update(library);
+    public String updateLibrary(
+            @PathVariable Long id,
+            @RequestParam String name
+    ) {
+        libraryService.update(id, name);
         return "redirect:/libraries";
     }
 
+    // DELETE
     @PostMapping("/{id}/delete")
     public String deleteLibrary(@PathVariable Long id) {
         libraryService.delete(id);

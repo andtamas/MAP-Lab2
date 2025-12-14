@@ -1,12 +1,11 @@
 package com.example.Library.controller;
 
 import com.example.Library.model.Author;
-import com.example.Library.model.BookAuthor;
+// Removed unused import: import com.example.Library.model.BookAuthor;
 import com.example.Library.service.AuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @Controller
@@ -37,21 +36,36 @@ public class AuthorController {
         return "redirect:/authors";
     }
 
+    /**
+     * MODIFIED: Unwraps Optional<Author> to Author for Thymeleaf to access properties directly.
+     */
     @GetMapping("/{id}/detail")
     public String viewAuthor(@PathVariable Long id, Model model) {
-        Optional<Author> author = authorService.getById(id);
+        // Find the Author or throw an exception if not found
+        Author author = authorService.getById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid author Id: " + id));
+
+        // Add the unwrapped Author object to the model
         model.addAttribute("author", author);
         return "author/detail";
     }
 
+    /**
+     * MODIFIED: Unwraps Optional<Author> to Author, which resolves the EL1008E error.
+     */
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
-        model.addAttribute("author", authorService.getById(id));
+        // Find the Author or throw an exception if not found
+        Author author = authorService.getById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid author Id: " + id));
+
+        // Add the unwrapped Author object to the model
+        model.addAttribute("author", author);
         return "author/form";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateBookAuthor(@PathVariable Long id, @ModelAttribute Author author) {
+    public String updateAuthor(@PathVariable Long id, @ModelAttribute Author author) {
         author.setId(id);
         authorService.update(author);
         return "redirect:/authors";

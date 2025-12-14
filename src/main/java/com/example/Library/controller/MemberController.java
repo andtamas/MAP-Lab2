@@ -16,43 +16,57 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    // LIST
     @GetMapping
     public String listMembers(Model model) {
         model.addAttribute("members", memberService.getAll());
         return "member/index";
     }
 
+    // FORM CREATE
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("member", new Member());
         return "member/form";
     }
 
+    // CREATE – ID generat automat
     @PostMapping
-    public String createMember(@ModelAttribute Member member) {
-        memberService.add(member);
+    public String createMember(
+            @RequestParam String name,
+            @RequestParam String email,
+            @RequestParam Long libraryId
+    ) {
+        memberService.create(name, email, libraryId);
         return "redirect:/members";
     }
 
+    // DETAIL
     @GetMapping("/{id}/detail")
     public String viewMember(@PathVariable Long id, Model model) {
         model.addAttribute("member", memberService.getById(id));
         return "member/detail";
     }
 
+    // FORM EDIT
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
         model.addAttribute("member", memberService.getById(id));
         return "member/form";
     }
 
+    // UPDATE – fără setId
     @PostMapping("/{id}/update")
-    public String updateMember(@PathVariable Long id, @ModelAttribute Member member) {
-        member.setId(id);
-        memberService.update(member);
+    public String updateMember(
+            @PathVariable Long id,
+            @RequestParam String name,
+            @RequestParam String email
+    ) {
+        memberService.update(id, name, email);
         return "redirect:/members";
     }
 
+    // DELETE
     @PostMapping("/{id}/delete")
     public String deleteMember(@PathVariable Long id) {
         memberService.delete(id);
