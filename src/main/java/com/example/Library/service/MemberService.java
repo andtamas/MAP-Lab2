@@ -21,24 +21,39 @@ public class MemberService {
     }
 
     public void create(String name, String email, Long libraryId) {
-        Library library = libraryRepository.findById(libraryId)
-                .orElseThrow();
 
+        // 1. Găsește entitatea gestionată Library
+        Library library = libraryRepository.findById(libraryId)
+                .orElseThrow(() -> new RuntimeException("Library with ID " + libraryId + " not found"));
+
+        // 2. Crează membrul cu entitatea Library găsită
         Member member = new Member(name, email, library);
+
+        // 3. Stabilește relația bidirecțională (Library -> Member)
+        // Aceasta este esențială pentru ca membrul să apară în lista bibliotecii.
+        library.addMember(member);
+
+        // 4. Salvează membrul
         memberRepository.save(member);
     }
 
     public void update(Long id, String name, String email) {
+        // Obține membrul existent
         Member member = memberRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("Member with ID " + id + " not found"));
 
+        // Actualizează câmpurile
         member.setName(name);
         member.setEmail(email);
-        // version e gestionat automat
+
+        // Salvează explicit (gestionează și actualizarea câmpului @Version)
+        memberRepository.save(member);
     }
 
     public Member getById(Long id) {
-        return memberRepository.findById(id).orElseThrow();
+        // Îmbunătățirea mesajului de excepție
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Member with ID " + id + " not found"));
     }
 
     public List<Member> getAll() {

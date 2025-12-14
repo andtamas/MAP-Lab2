@@ -30,38 +30,42 @@ public class MemberController {
         return "member/form";
     }
 
-    // CREATE – ID generat automat
+    // CREATE – ID generat automat, folosește Serviciul corectat
     @PostMapping
     public String createMember(
             @RequestParam String name,
             @RequestParam String email,
             @RequestParam Long libraryId
     ) {
+        // Logica de stabilire a relației JPA este acum în MemberService.create()
         memberService.create(name, email, libraryId);
         return "redirect:/members";
     }
 
-    // DETAIL
+    // DETAIL - Unwraps Member
     @GetMapping("/{id}/detail")
     public String viewMember(@PathVariable Long id, Model model) {
+        // getById aruncă RuntimeException dacă nu este găsit, tratare OK.
         model.addAttribute("member", memberService.getById(id));
         return "member/detail";
     }
 
-    // FORM EDIT
+    // FORM EDIT - Unwraps Member
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
+        // getById aruncă RuntimeException dacă nu este găsit.
         model.addAttribute("member", memberService.getById(id));
         return "member/form";
     }
 
-    // UPDATE – fără setId
+    // UPDATE – folosește Serviciul corectat
     @PostMapping("/{id}/update")
     public String updateMember(
             @PathVariable Long id,
             @RequestParam String name,
             @RequestParam String email
     ) {
+        // Logica de actualizare a numelui/email-ului și salvarea se află în Service.
         memberService.update(id, name, email);
         return "redirect:/members";
     }
