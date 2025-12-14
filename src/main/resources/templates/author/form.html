@@ -10,7 +10,11 @@
 
 <form th:action="${author.id == null} ? @{/authors} : @{'/authors/' + ${author.id} + '/edit'}"
       th:object="${author}" method="post">
-    ID: <input type="text" th:field="*{id}" th:readonly="${author.id != null}"/><br>
+
+    <div th:if="${author.id != null}">
+        ID: <input type="text" th:field="*{id}" th:readonly="true"/><br>
+    </div>
+
     Name: <input type="text" th:field="*{name}"/><br>
     <button type="submit">Submit</button>
 </form>
