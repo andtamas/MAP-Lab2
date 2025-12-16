@@ -1,7 +1,8 @@
 package com.example.Library.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,18 +18,21 @@ public class Member implements Serializable {
     @Version
     private Long version;
 
+    @NotBlank(message = "Numele este obligatoriu.")
     private String name;
+
+    @NotBlank(message = "Emailul este obligatoriu.")
+    @Email(message = "Format email invalid.")
     private String email;
 
-    // Câmp utilitar pentru a prelua ID-ul din formular (nu este mapat direct în baza de date)
+    // Câmp utilitar pentru a prelua ID-ul din formular
     @Transient
+    // MODIFICAT: S-a eliminat @NotNull. Validarea este acum gestionată de Controller/Service.
     private Long libraryId;
 
     // Relația ManyToOne cu Library (cheia străină)
     @ManyToOne
-    // Alinierea cu eroarea MySQL primită și setarea NOT NULL la nivel JPA
     @JoinColumn(name = "library_id", nullable = false)
-    @NotNull(message = "Bibliotecă este obligatorie.") // Validare aplicată pe obiectul persistent
     private Library library;
 
     // Relația OneToMany cu Loan
@@ -50,8 +54,6 @@ public class Member implements Serializable {
         this.email = email;
         this.setLibrary(library);
     }
-
-    // NOTA: Constructorul cu Long id a fost eliminat pentru a forța generarea automată.
 
     // --- Loans Management (Utilities) ---
 
@@ -116,7 +118,6 @@ public class Member implements Serializable {
         return library;
     }
 
-    // Setter esențial: gestionează legătura bidirecțională
     public void setLibrary(Library library) {
         if (this.library != null) {
             this.library.getMembers().remove(this);
@@ -127,6 +128,7 @@ public class Member implements Serializable {
         }
     }
 
+    // Corecție pentru afișarea ID-ului în UI (când este încărcat din baza de date)
     public Long getLibraryId() {
         if (this.library != null) {
             return this.library.getId();

@@ -2,24 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Member Details</title>
+    <title>Member Detail</title>
 </head>
 <body>
+<h1 th:text="'Member Details - ID: ' + ${member.id}">Member Details</h1>
 
+<p><strong>ID:</strong> <span th:text="${member.id}">1</span></p>
+<p><strong>Name:</strong> <span th:text="${member.name}">John Doe</span></p>
 
-<h1>Member Details</h1>
+<p><strong>Email:</strong> <span th:text="${member.email}">john.doe@example.com</span></p>
 
-<p>ID: <span th:text="${member.id}"></span></p>
-<p>Name: <span th:text="${member.name}"></span></p>
-<p>Library ID: <span th:text="${member.libraryId}"></span></p>
+<p>
+    <strong>Library ID:</strong>
+    <span th:text="${member.libraryId}">1</span>
+</p>
 
-<form th:action="@{'/members/' + ${member.id} + '/edit'}" method="get" style="display:inline">
-    <button type="submit">Edit</button>
-</form>
-<form th:action="@{'/members/' + ${member.id} + '/delete'}" method="post" style="display:inline">
-    <button type="submit">Delete</button>
-</form>
-<a href="/members">Back</a>
-
+<hr>
+<a th:href="@{/members/{id}/edit(id=${member.id})}">Edit Member</a> |
+<a th:href="@{/members}">Back to List</a>
 </body>
 </html>

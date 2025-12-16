@@ -5,7 +5,7 @@ import com.example.Library.service.MemberService;
 import com.example.Library.service.LibraryService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model; // Asigurați-vă că acest import există
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,14 +21,14 @@ public class MemberController {
         this.libraryService = libraryService;
     }
 
-    // LIST (Metodă corectă)
+    // LIST
     @GetMapping
     public String listMembers(Model model) {
         model.addAttribute("members", memberService.getAll());
         return "member/index";
     }
 
-    // FORM CREATE (Metodă corectă)
+    // FORM CREATE
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("member", new Member());
@@ -36,21 +36,22 @@ public class MemberController {
         return "member/form";
     }
 
-    // CREATE – CORECTAT: Adăugat 'Model model' în parametri
+    // CREATE – Include Model model în parametri
     @PostMapping
     public String createMember(@Valid @ModelAttribute("member") Member member, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            // Acum 'model' este accesibil
-            model.addAttribute("libraries", libraryService.getAll());
+            model.addAttribute("libraries", libraryService.getAll()); // Reîncarcă lista
             return "member/form";
         }
 
         try {
+            // Aici, daca libraryId este null, libraryRepository.findById(null) va arunca NullPointerException sau
+            // RuntimeException (daca arunca findById.orElseThrow)
             memberService.create(member.getName(), member.getEmail(), member.getLibraryId());
         } catch (RuntimeException e) {
+            // Prinde eroarea de ID lipsa sau invalid din Service
             bindingResult.rejectValue("libraryId", "error.member", e.getMessage());
-            // Acum 'model' este accesibil
             model.addAttribute("libraries", libraryService.getAll());
             return "member/form";
         }
@@ -58,14 +59,14 @@ public class MemberController {
         return "redirect:/members";
     }
 
-    // DETAIL (Fără schimbări)
+    // DETAIL
     @GetMapping("/{id}/detail")
     public String viewMember(@PathVariable Long id, Model model) {
         model.addAttribute("member", memberService.getById(id));
         return "member/detail";
     }
 
-    // FORM EDIT (Metodă corectă)
+    // FORM EDIT
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
         model.addAttribute("member", memberService.getById(id));
@@ -73,17 +74,16 @@ public class MemberController {
         return "member/form";
     }
 
-    // UPDATE – CORECTAT: Adăugat 'Model model' în parametri
+    // UPDATE – Include Model model în parametri
     @PostMapping("/{id}/update")
     public String updateMember(
             @PathVariable Long id,
             @Valid @ModelAttribute("member") Member member,
             BindingResult bindingResult,
-            Model model // Adăugat: face obiectul 'model' accesibil
+            Model model
     ) {
         if (bindingResult.hasErrors()) {
-            // Acum 'model' este accesibil
-            model.addAttribute("libraries", libraryService.getAll());
+            model.addAttribute("libraries", libraryService.getAll()); // Reîncarcă lista
             return "member/form";
         }
 
@@ -91,15 +91,13 @@ public class MemberController {
             memberService.update(id, member.getName(), member.getEmail());
         } catch (RuntimeException e) {
             System.err.println("Eroare la actualizare: " + e.getMessage());
-            // Dacă doriți să afișați eroarea în formularul de editare,
-            // ar trebui să adăugați logica de reîncărcare a bibliotecilor aici.
             return "redirect:/members?error=" + id;
         }
 
         return "redirect:/members";
     }
 
-    // DELETE (Fără schimbări)
+    // DELETE
     @PostMapping("/{id}/delete")
     public String deleteMember(@PathVariable Long id) {
         memberService.delete(id);
