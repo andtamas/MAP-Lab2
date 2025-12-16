@@ -26,7 +26,7 @@ public class Member implements Serializable {
     private Long libraryId;
 
     @ManyToOne
-    @JoinColumn(name = "library_fk") // Numele coloanei cheie străină în tabela 'members'
+    @JoinColumn(name = "library_id", nullable = false) // Numele coloanei aliniat cu eroarea + forțat NOT NULL
     private Library library;
 
     // Relația OneToMany cu Loan
@@ -114,7 +114,6 @@ public class Member implements Serializable {
         return library;
     }
 
-    // Setter esențial: actualizează legătura bidirecțională
     public void setLibrary(Library library) {
         if (this.library != null) {
             this.library.getMembers().remove(this);
@@ -123,19 +122,18 @@ public class Member implements Serializable {
         if (library != null) {
             library.getMembers().add(this);
         }
-        // Actualizează câmpul transient pentru compatibilitatea cu formularele/controlerul
-        this.libraryId = (library != null) ? library.getId() : null;
     }
 
     public Long getLibraryId() {
+        if (this.library != null) {
+            return this.library.getId();
+        }
         return libraryId;
     }
 
     // Setter pentru câmpul transient, folosit la binding-ul din formular
     public void setLibraryId(Long libraryId) {
         this.libraryId = libraryId;
-        // NOTA: Legătura JPA (this.library) va fi setată în MemberService
-        // folosind acest ID înainte de salvare.
     }
 
     public Set<Loan> getLoans() {
