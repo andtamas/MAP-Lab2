@@ -1,5 +1,6 @@
 package com.example.Library.service;
 import com.example.Library.model.Reservation;
+import com.example.Library.model.ReservationStatus;
 import com.example.Library.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,18 @@ public class ReservationService {
 
     public List<Reservation> getAll() {
         return reservationRepository.findAll();
+    }
+
+    public List<Reservation> getFiltered(ReservationStatus status, Long memberId) {
+        if (status != null && memberId != null) {
+            return reservationRepository.findByStatusAndMember_Id(status, memberId);
+        } else if (status != null) {
+            return reservationRepository.findByStatus(status);
+        } else if (memberId != null) {
+            return reservationRepository.findByMember_Id(memberId);
+        } else {
+            return reservationRepository.findAll();
+        }
     }
 
     public Optional<Reservation> getById(Long id) {

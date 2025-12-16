@@ -1,6 +1,7 @@
 package com.example.Library.controller;
 
 import com.example.Library.model.Reservation;
+import com.example.Library.model.ReservationStatus;
 import com.example.Library.service.ReservationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +20,17 @@ public class ReservationController {
     }
 
     @GetMapping
-    public String listReservations(Model model) {
-        model.addAttribute("reservations", reservationService.getAll());
+    public String listReservations(
+            Model model,
+            @RequestParam(required = false) ReservationStatus status,
+            @RequestParam(required = false) Long memberId
+    ) {
+        model.addAttribute("reservations", reservationService.getFiltered(status, memberId));
+
+        model.addAttribute("filterStatus", status);
+        model.addAttribute("filterMemberId", memberId);
+        model.addAttribute("allStatuses", ReservationStatus.values()); // Pentru dropdown-ul Status
+
         return "reservation/index";
     }
 
@@ -49,7 +59,6 @@ public class ReservationController {
         return "reservation/form";
     }
 
-    // Process update
     @PostMapping("/{id}/edit")
     public String updateReservation(@PathVariable Long id, @ModelAttribute Reservation reservation) {
         reservation.setId(id);
