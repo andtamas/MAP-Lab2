@@ -10,9 +10,31 @@
 
 <form th:action="${bookAuthor.id == null} ? @{/bookauthors} : @{'/bookauthors/' + ${bookAuthor.id} + '/edit'}"
       th:object="${bookAuthor}" method="post">
-    ID: <input type="text" th:field="*{id}" th:readonly="${bookAuthor.id != null}"/><br>
-    Book ID: <input type="text" th:field="*{bookId}"/><br>
-    Author ID: <input type="text" th:field="*{authorId}"/><br>
+
+    <div th:if="${bookAuthor.id != null}">
+        <label>ID: <input type="text" th:field="*{id}" th:readonly="true"/></label><br>
+    </div>
+
+    <label>Book:</label>
+    <select th:field="*{bookId}">
+        <option value="">-- Select Book --</option>
+        <option th:each="book : ${books}"
+                th:value="${book.id}"
+                th:text="${book.title + ' (ID: ' + book.id + ')'}"
+                th:selected="${book.id == bookAuthor.bookId}"></option>
+    </select>
+    <span th:if="${#fields.hasErrors('bookId')}" th:errors="*{bookId}" style="color: red;">Book ID Error</span><br>
+
+    <label>Author:</label>
+    <select th:field="*{authorId}">
+        <option value="">-- Select Author --</option>
+        <option th:each="author : ${authors}"
+                th:value="${author.id}"
+                th:text="${author.name + ' (ID: ' + author.id + ')'}"
+                th:selected="${author.id == bookAuthor.authorId}"></option>
+    </select>
+    <span th:if="${#fields.hasErrors('authorId')}" th:errors="*{authorId}" style="color: red;">Author ID Error</span><br>
+
     <button type="submit">Submit</button>
 </form>
 

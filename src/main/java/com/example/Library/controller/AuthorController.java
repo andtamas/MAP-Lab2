@@ -2,8 +2,10 @@ package com.example.Library.controller;
 
 import com.example.Library.model.Author;
 import com.example.Library.service.AuthorService;
+import jakarta.validation.Valid; // NECESAR pentru a declanșa validarea
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult; // NECESAR pentru a prinde erorile
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
@@ -17,41 +19,40 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    /**
-     * Afișează lista de autori, cu opțiune de filtrare după nume.
-     */
     @GetMapping
     public String listAuthors(
             Model model,
-            @RequestParam(required = false) String name // Adăugat: Parametrul de filtrare
+            @RequestParam(required = false) String name
     ) {
-        // Utilizează noua metodă filtrată din Service
         model.addAttribute("authors", authorService.getFiltered(name));
-
-        // Adaugă parametrul de filtrare în Model pentru a menține valoarea în formular
         model.addAttribute("filterName", name);
-
-        return "author/index";  // templates/author/index.html
+        return "author/index";
     }
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("author", new Author());
-        return "author/form";  // templates/author/form.html
+        return "author/form";
     }
 
+    // METODĂ MODIFICATĂ: Include @Valid și BindingResult
     @PostMapping
-    public String createAuthor(@ModelAttribute Author author) {
+    public String createAuthor(@Valid @ModelAttribute("author") Author author, BindingResult bindingResult) {
+
+        // 1. Verifică dacă există erori de validare (e.g., câmpul 'name' este @NotBlank și este gol)
+        if (bindingResult.hasErrors()) {
+            // Dacă există erori, returnează formularul.
+            // Thymeleaf va folosi 'bindingResult' pentru a afișa mesajele de eroare.
+            return "author/form";
+        }
+
+        // 2. Dacă nu există erori, salvează și redirecționează către lista de autori
         authorService.add(author);
         return "redirect:/authors";
     }
 
-    /**
-     * Afișează detaliile autorului.
-     */
     @GetMapping("/{id}/detail")
     public String viewAuthor(@PathVariable Long id, Model model) {
-        // Găsește Autorul sau aruncă excepție
         Author author = authorService.getById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid author Id: " + id));
 
@@ -59,12 +60,8 @@ public class AuthorController {
         return "author/detail";
     }
 
-    /**
-     * Afișează formularul de editare.
-     */
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
-        // Găsește Autorul sau aruncă excepție
         Author author = authorService.getById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid author Id: " + id));
 
@@ -72,8 +69,14 @@ public class AuthorController {
         return "author/form";
     }
 
+    // MODIFICAT: Adaugă @Valid și BindingResult și la update
     @PostMapping("/{id}/edit")
-    public String updateAuthor(@PathVariable Long id, @ModelAttribute Author author) {
+    public String updateAuthor(@PathVariable Long id, @Valid @ModelAttribute Author author, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "author/form";
+        }
+
         author.setId(id);
         authorService.update(author);
         return "redirect:/authors";
