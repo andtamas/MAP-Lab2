@@ -10,7 +10,9 @@
 <form th:action="@{${member.id} != null ? '/members/' + ${member.id} + '/update' : '/members'}"
       th:object="${member}" method="post">
 
-    <label>ID: <input type="text" th:field="*{id}" th:readonly="${member.id} != null"/></label><br>
+    <div th:if="${member.id != null}">
+        <label>ID: <input type="text" th:field="*{id}" th:readonly="true"/></label><br>
+    </div>
 
     <label>Name: <input type="text" th:field="*{name}"/></label>
     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red;">Name Error</span><br>
@@ -18,7 +20,15 @@
     <label>Email: <input type="text" th:field="*{email}"/></label>
     <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;">Email Error</span><br>
 
-    <label>Library ID: <input type="text" th:field="*{libraryId}"/></label>
+    <label>Library:
+        <select th:field="*{libraryId}">
+            <option value="">-- Select Library --</option>
+            <option th:each="library : ${libraries}"
+                    th:value="${library.id}"
+                    th:text="${library.name + ' (ID: ' + library.id + ')'}"
+                    th:selected="${library.id == member.libraryId}"></option>
+        </select>
+    </label>
     <span th:if="${#fields.hasErrors('libraryId')}" th:errors="*{libraryId}" style="color: red;">Library ID Error</span><br>
 
     <button type="submit" th:text="${member.id} != null ? 'Update' : 'Add'"></button>

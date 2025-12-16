@@ -1,8 +1,7 @@
-// andtamas/map-lab2/MAP-Lab2-1dd802d241fb9490adc2ace817a2860f83c27d8a/src/main/java/com/example/Library/model/Member.java
-
 package com.example.Library.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -22,11 +21,10 @@ public class Member implements Serializable {
     private String name;
     private String email;
 
-    // Câmp utilitar pentru a prelua ID-ul din formular (nu este mapat direct în baza de date)
     @Transient
+    @NotNull(message = "Bibliotecă este obligatorie.") // MODIFICAT: Adăugat validare
     private Long libraryId;
 
-    // Relația ManyToOne cu Library
     @ManyToOne
     @JoinColumn(name = "library_fk") // Numele coloanei cheie străină în tabela 'members'
     private Library library;
@@ -51,12 +49,7 @@ public class Member implements Serializable {
         this.setLibrary(library); // Folosește setter-ul pentru a stabili legătura bidirecțională
     }
 
-    public Member(Long id, String name, String email, Library library) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.setLibrary(library);
-    }
+    // Constructorul public cu Long id a fost eliminat pentru a forța generarea automată.
 
     // --- Loans Management (Utilities) ---
 
