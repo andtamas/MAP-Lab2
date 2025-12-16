@@ -2,7 +2,6 @@ package com.example.Library.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,12 +20,15 @@ public class Member implements Serializable {
     private String name;
     private String email;
 
+    // Câmp utilitar pentru a prelua ID-ul din formular (nu este mapat direct în baza de date)
     @Transient
-    @NotNull(message = "Bibliotecă este obligatorie.") // MODIFICAT: Adăugat validare
     private Long libraryId;
 
+    // Relația ManyToOne cu Library (cheia străină)
     @ManyToOne
-    @JoinColumn(name = "library_id", nullable = false) // Numele coloanei aliniat cu eroarea + forțat NOT NULL
+    // Alinierea cu eroarea MySQL primită și setarea NOT NULL la nivel JPA
+    @JoinColumn(name = "library_id", nullable = false)
+    @NotNull(message = "Bibliotecă este obligatorie.") // Validare aplicată pe obiectul persistent
     private Library library;
 
     // Relația OneToMany cu Loan
@@ -46,10 +48,10 @@ public class Member implements Serializable {
     public Member(String name, String email, Library library) {
         this.name = name;
         this.email = email;
-        this.setLibrary(library); // Folosește setter-ul pentru a stabili legătura bidirecțională
+        this.setLibrary(library);
     }
 
-    // Constructorul public cu Long id a fost eliminat pentru a forța generarea automată.
+    // NOTA: Constructorul cu Long id a fost eliminat pentru a forța generarea automată.
 
     // --- Loans Management (Utilities) ---
 
@@ -114,6 +116,7 @@ public class Member implements Serializable {
         return library;
     }
 
+    // Setter esențial: gestionează legătura bidirecțională
     public void setLibrary(Library library) {
         if (this.library != null) {
             this.library.getMembers().remove(this);
@@ -131,7 +134,6 @@ public class Member implements Serializable {
         return libraryId;
     }
 
-    // Setter pentru câmpul transient, folosit la binding-ul din formular
     public void setLibraryId(Long libraryId) {
         this.libraryId = libraryId;
     }
