@@ -7,6 +7,31 @@
 <body>
 <h1>Members</h1>
 
+<h2>Filter Members</h2>
+<form th:action="@{/members}" method="get">
+
+    <label for="id">Member ID:</label>
+    <input type="number" id="id" name="id" th:value="${filterId}" placeholder="Filter by ID"/>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="${filterName}" placeholder="Filter by Name"/>
+
+    <label for="libraryId">Library:</label>
+    <select id="libraryId" name="libraryId">
+        <option value="">-- All Libraries --</option>
+        <option th:each="library : ${allLibraries}"
+                th:value="${library.id}"
+                th:text="${library.name + ' (ID: ' + library.id + ')'}"
+                th:selected="${library.id == filterLibraryId}"></option>
+    </select>
+    <br>
+
+    <button type="submit">Filter</button>
+    <a th:href="@{/members}"><button type="button">Clear Filters</button></a>
+</form>
+
+<hr/>
+
 <a href="/members/new">Add New Member</a>
 
 <table border="1" cellpadding="4" cellspacing="0">

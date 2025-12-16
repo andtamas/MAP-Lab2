@@ -5,6 +5,7 @@ import com.example.Library.model.Member;
 import com.example.Library.repository.LibraryRepository;
 import com.example.Library.repository.MemberRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class MemberService {
         Member member = new Member(name, email, library);
 
         // 3. Stabilește relația bidirecțională (Library -> Member)
-        // Aceasta este esențială pentru ca membrul să apară în lista bibliotecii.
         library.addMember(member);
 
         // 4. Salvează membrul
@@ -50,17 +50,33 @@ public class MemberService {
         memberRepository.save(member);
     }
 
+    // NOUĂ METODĂ DE FILTRARE
+    @Transactional(readOnly = true)
+    public List<Member> getFiltered(Long id, String name, Long libraryId) {
+        // Curățare filtru Nume
+        String nameFilter = (name != null && !name.trim().isEmpty()) ? name.trim() : null;
+
+        // Dacă nu este aplicat niciun filtru, returnează toți membrii cu fetch eager
+        if (id == null && nameFilter == null && libraryId == null) {
+            return memberRepository.findAllWithLibrary();
+        }
+
+        // Altfel, folosește interogarea filtrată din Repository
+        return memberRepository.findFiltered(id, nameFilter, libraryId);
+    }
+
+    @Transactional(readOnly = true)
     public Member getById(Long id) {
-        // Îmbunătățirea mesajului de excepție
         return memberRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Member with ID " + id + " not found"));
     }
 
-    public List<Member> getAll() {
-        return memberRepository.findAll();
-    }
-
     public void delete(Long id) {
         memberRepository.deleteById(id);
+    }
+
+    // Metoda getAll este menținută, dar listMembers din Controller folosește acum getFiltered.
+    public List<Member> getAll() {
+        return memberRepository.findAll();
     }
 }

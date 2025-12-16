@@ -7,6 +7,18 @@
 <body>
 <h1>Authors</h1>
 
+<h2>Filter Authors</h2>
+<form th:action="@{/authors}" method="get">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="${filterName}" placeholder="Filter by Name"/>
+
+    <button type="submit">Filter</button>
+    <a th:href="@{/authors}"><button type="button">Clear Filters</button></a>
+</form>
+
+<hr/>
+
 <a href="/authors/new">Add New Author</a>
 
 <table border="1" cellpadding="4" cellspacing="0">

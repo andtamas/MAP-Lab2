@@ -21,14 +21,30 @@ public class MemberController {
         this.libraryService = libraryService;
     }
 
-    // LIST
+    // LIST - MODIFICAT pentru a accepta și procesa filtrele
     @GetMapping
-    public String listMembers(Model model) {
-        model.addAttribute("members", memberService.getAll());
+    public String listMembers(
+            Model model,
+            @RequestParam(required = false) Long id,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long libraryId
+    ) {
+        // Obține membrii filtrați
+        model.addAttribute("members", memberService.getFiltered(id, name, libraryId));
+
+        // Adaugă atributele de filtrare în Model pentru a menține valorile în formular
+        model.addAttribute("filterId", id);
+        model.addAttribute("filterName", name);
+        model.addAttribute("filterLibraryId", libraryId);
+
+        // Adaugă lista de biblioteci pentru dropdown-ul de filtrare
+        model.addAttribute("allLibraries", libraryService.getAll());
+
         return "member/index";
     }
 
-    // FORM CREATE
+    // ... (restul metodelor createMember, viewMember, updateMember, deleteMember rămân neschimbate în structura de bază)
+
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("member", new Member());
@@ -36,21 +52,17 @@ public class MemberController {
         return "member/form";
     }
 
-    // CREATE – Include Model model în parametri
     @PostMapping
     public String createMember(@Valid @ModelAttribute("member") Member member, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("libraries", libraryService.getAll()); // Reîncarcă lista
+            model.addAttribute("libraries", libraryService.getAll());
             return "member/form";
         }
 
         try {
-            // Aici, daca libraryId este null, libraryRepository.findById(null) va arunca NullPointerException sau
-            // RuntimeException (daca arunca findById.orElseThrow)
             memberService.create(member.getName(), member.getEmail(), member.getLibraryId());
         } catch (RuntimeException e) {
-            // Prinde eroarea de ID lipsa sau invalid din Service
             bindingResult.rejectValue("libraryId", "error.member", e.getMessage());
             model.addAttribute("libraries", libraryService.getAll());
             return "member/form";
@@ -59,14 +71,12 @@ public class MemberController {
         return "redirect:/members";
     }
 
-    // DETAIL
     @GetMapping("/{id}/detail")
     public String viewMember(@PathVariable Long id, Model model) {
         model.addAttribute("member", memberService.getById(id));
         return "member/detail";
     }
 
-    // FORM EDIT
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
         model.addAttribute("member", memberService.getById(id));
@@ -74,7 +84,6 @@ public class MemberController {
         return "member/form";
     }
 
-    // UPDATE – Include Model model în parametri
     @PostMapping("/{id}/update")
     public String updateMember(
             @PathVariable Long id,
@@ -83,7 +92,7 @@ public class MemberController {
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("libraries", libraryService.getAll()); // Reîncarcă lista
+            model.addAttribute("libraries", libraryService.getAll());
             return "member/form";
         }
 
@@ -97,7 +106,6 @@ public class MemberController {
         return "redirect:/members";
     }
 
-    // DELETE
     @PostMapping("/{id}/delete")
     public String deleteMember(@PathVariable Long id) {
         memberService.delete(id);

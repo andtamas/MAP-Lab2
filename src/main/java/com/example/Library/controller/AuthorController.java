@@ -1,7 +1,6 @@
 package com.example.Library.controller;
 
 import com.example.Library.model.Author;
-// Removed unused import: import com.example.Library.model.BookAuthor;
 import com.example.Library.service.AuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +17,20 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
+    /**
+     * Afișează lista de autori, cu opțiune de filtrare după nume.
+     */
     @GetMapping
-    public String listAuthors(Model model) {
-        model.addAttribute("authors", authorService.getAll());
+    public String listAuthors(
+            Model model,
+            @RequestParam(required = false) String name // Adăugat: Parametrul de filtrare
+    ) {
+        // Utilizează noua metodă filtrată din Service
+        model.addAttribute("authors", authorService.getFiltered(name));
+
+        // Adaugă parametrul de filtrare în Model pentru a menține valoarea în formular
+        model.addAttribute("filterName", name);
+
         return "author/index";  // templates/author/index.html
     }
 
@@ -37,29 +47,27 @@ public class AuthorController {
     }
 
     /**
-     * MODIFIED: Unwraps Optional<Author> to Author for Thymeleaf to access properties directly.
+     * Afișează detaliile autorului.
      */
     @GetMapping("/{id}/detail")
     public String viewAuthor(@PathVariable Long id, Model model) {
-        // Find the Author or throw an exception if not found
+        // Găsește Autorul sau aruncă excepție
         Author author = authorService.getById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid author Id: " + id));
 
-        // Add the unwrapped Author object to the model
         model.addAttribute("author", author);
         return "author/detail";
     }
 
     /**
-     * MODIFIED: Unwraps Optional<Author> to Author, which resolves the EL1008E error.
+     * Afișează formularul de editare.
      */
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
-        // Find the Author or throw an exception if not found
+        // Găsește Autorul sau aruncă excepție
         Author author = authorService.getById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid author Id: " + id));
 
-        // Add the unwrapped Author object to the model
         model.addAttribute("author", author);
         return "author/form";
     }
